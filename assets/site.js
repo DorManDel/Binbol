@@ -4,6 +4,7 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const number = (value) => Number(value).toLocaleString('en-US');
+  const compact = (v) => v>=1e9?(v/1e9).toFixed(2)+'B':v>=1e6?(v/1e6).toFixed(2)+'M':v>=1e3?(v/1e3).toFixed(v<1e4?1:0)+'K':String(v);
   const glyphHigh = ['✧','◈','⌬','◇','⟐','⊕','⋈','⌘','⌁','⟡','◉','⊗','△','❖','☽','⧉'];
   const glyphLow  = ['·','˙','°','⁺','×','⌃','~','∗','⌄','˚','–','○','⁕','˟','ː','†'];
   const projects = [
@@ -11,7 +12,7 @@
     {id:'mario', name:'Super Mario Land', emoji:'★', size:'64 KiB', bytes:65536, description:'1989 Game Boy cartridge-size example'},
     {id:'pokemon', name:'Pokémon Red', emoji:'◉', size:'1 MiB', bytes:1048576, description:'Game Boy cartridge-size example'},
     {id:'apollo', name:'Apollo AGC · fixed rope', emoji:'☾', size:'72 KiB', bytes:36864*2, description:'36,864 words × 16 bits, including parity'},
-    {id:'linux', name:'Linux 7.3 kernel', emoji:'⌘', size:'30.96M LOC', bytes:null, description:'Code-line count only; source byte size not measured'}
+    {id:'linux', name:'Linux 7.3 · .tar.xz', short:'Linux 7.3', emoji:'⌘', size:'154.88 MiB', bytes:162399360, description:'Measured .tar.xz compressed archive (162,399,360 bytes), NOT the uncompressed source. Linux 7.3 has approximately 30.96 million detected code lines; no Linux Binball-dictionary benchmark has been run.'}
   ];
   function createTile(value, small = false) {
     const el = document.createElement('span');
@@ -26,28 +27,71 @@
     el.append(primary, secondary);
     return el;
   }
+  // Each filled position of B, i, n cycles that letter's actual ASCII bits.
+  // Repeated bits are a typographic pattern; each letter's exact 8-bit code is shown separately.
   function initBinaryLogo() {
-    const target = $('binary-word');
-    if (!target) return;
-    const shapes = [
-      ['111111100','110000110','110000110','110000110','111111100','110000110','110000110','110000110','110000110','111111100','000000000'],
-      ['00110','00110','00000','00110','00110','00110','00110','00110','00110','00110','00110'],
-      ['000000000','000000000','110111100','111000110','110000110','110000110','110000110','110000110','110000110','110000110','110000110']
+    const target = $('binary-word'); if (!target) return;
+    const letters = [
+      {code:'01000010', x:0, rows:['11111110','11000111','11000011','11000111','11111110','11000111','11000011','11000111','11111110']},
+      {code:'01101001', x:94, rows:['00100','00100','00000','01100','01100','01100','01100','01100','01100']},
+      {code:'01101110', x:160, rows:['00000000','00000000','11011110','11100111','11000011','11000011','11000011','11000011','11000011']}
     ];
-    shapes.forEach((rows, letterIndex) => {
-      const letter = document.createElement('div');
-      letter.className = 'binary-letter';
-      rows.forEach((pattern, rowIndex) => {
-        const line = document.createElement('span');
-        let out = '';
-        for (let i = 0; i < pattern.length; i++) {
-          out += pattern[i] === '1' ? ((i * 3 + rowIndex + letterIndex) % 4 < 2 ? '0' : '1') : ' ';
-        }
-        line.textContent = out;
-        letter.append(line);
-      });
-      target.append(letter);
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 264 112');
+    svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('class','binary-logo-svg');
+    svg.setAttribute('role','img');svg.setAttribute('aria-label','Bin built from real ASCII bits: B 01000010, i 01101001, n 01101110');
+    letters.forEach(letter=>{
+      let index=0;
+      letter.rows.forEach((line,y)=>Array.from(line).forEach((mask,x)=>{
+        if(mask!=='1')return;
+        const t=document.createElementNS(ns,'text');
+        t.setAttribute('x',String(letter.x+x*11.8));t.setAttribute('y',String(16+y*11.7));
+        t.setAttribute('class','binary-digit');t.textContent=letter.code[index++%8];svg.append(t);
+      }));
     });
+    target.replaceChildren(svg);
+  }
+  const markPaths=[
+    'M50 8 L83 27 L83 69 L50 90 L17 69 L17 27 Z M50 8 V90 M17 27 L83 69',
+    'M50 7 L88 50 L50 93 L12 50 Z M50 27 L70 50 L50 73 L30 50 Z',
+    'M16 20 C61 6 94 37 84 63 C77 88 40 101 18 70 C47 82 72 60 61 38 C51 20 37 18 16 20 Z',
+    'M50 6 L60 38 L93 50 L60 61 L50 94 L39 61 L7 50 L39 38 Z',
+    'M15 25 L50 9 L85 25 L65 49 L85 74 L50 92 L15 74 L35 49 Z M50 9 V92',
+    'M18 19 L82 19 L18 81 L82 81 M50 10 L50 90',
+    'M15 55 Q30 8 49 55 T85 55 M15 78 Q30 31 49 78 T85 78',
+    'M20 12 V88 M80 12 V88 M20 27 L80 73 M80 27 L20 73',
+    'M50 8 L88 37 L63 54 L84 83 L50 94 L16 83 L37 54 L12 37 Z',
+    'M15 80 L15 37 Q50 -5 85 37 L85 80 M30 80 L30 44 Q50 22 70 44 L70 80',
+    'M50 50 C80 15 104 50 79 74 C59 100 11 78 20 43 C29 8 73 14 69 46 C64 74 38 73 39 53',
+    'M14 50 L38 16 L62 50 L86 16 M14 84 L38 50 L62 84 L86 50',
+    'M50 9 L86 83 L14 83 Z M50 31 L69 70 L31 70 Z',
+    'M14 26 L86 26 L86 45 L14 45 Z M14 63 L86 63 L86 82 L14 82 Z',
+    'M50 7 C70 21 70 41 50 50 C30 59 30 79 50 93 M50 7 C30 21 30 41 50 50 C70 59 70 79 50 93',
+    'M50 8 L85 28 L74 69 L50 91 L26 69 L15 28 Z M15 28 L85 28 M26 69 L74 69'
+  ];
+  const spectrum=['#ff695e','#ffa157','#ffd05a','#f2ec6c','#b8ee6c','#67e7a1','#4ce8ce','#48dbef','#6bc5ff','#849aff','#a58aff','#cf83f5','#f27dcf','#f184aa','#ad6aff','#ffffff'];
+  const luminance=Array.from({length:16},(_,i)=>{const v=Math.round(52+i*12);return '#'+[v,v,v].map(x=>x.toString(16).padStart(2,'0')).join('');});
+  function getVisualColor(index){return (($('glyph-palette-type')?.value)==='luminance'?luminance:spectrum)[index];}
+  function createNativeGlyph(value,small=false) {
+    const wrapper=document.createElement('span');wrapper.className='native-glyph'+(small?' small':'');
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');
+    svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',markPaths[value>>4]);path.setAttribute('fill','none');
+    path.setAttribute('stroke',getVisualColor(value&15));path.setAttribute('stroke-width','4.8');
+    path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');
+    svg.append(path);wrapper.append(svg);
+    wrapper.title=`Value ${value}: shape ${value>>4}, color ${value&15}`;
+    wrapper.setAttribute('role','img');wrapper.setAttribute('aria-label',wrapper.title);
+    return wrapper;
+  }
+  function initFeaturePager(){
+    const cards=Array.from(document.querySelectorAll('.feature-card'));if(!cards.length)return;
+    let active=0;
+    const display=()=>{cards.forEach((card,index)=>card.classList.toggle('mobile-feature-active',index===active));
+      const t=$('feature-current');if(t)t.textContent=`${active+1} / ${cards.length}`;};
+    $('feature-prev')?.addEventListener('click',()=>{active=(active+cards.length-1)%cards.length;display();});
+    $('feature-next')?.addEventListener('click',()=>{active=(active+1)%cards.length;display();});display();
   }
   function initRain() {
     const canvas = $('symbol-rain');
@@ -114,10 +158,10 @@
         const tr = document.createElement('tr');tr.tabIndex=0;tr.setAttribute('aria-label',`Select ${project.name}`);
         if(project.id===select.value)tr.className='selected';
         const name=document.createElement('td');name.innerHTML=`<span class="project-name"><span class="project-emoji" aria-hidden="true">${project.emoji}</span><b></b></span>`;
-        name.querySelector('b').textContent=project.name;
-        const size=document.createElement('td');size.textContent=project.size;
-        const binary=document.createElement('td');binary.textContent=project.bytes===null?'—':number(project.bytes*8);
-        const symbols=document.createElement('td');symbols.textContent=project.bytes===null?'—':number(Math.ceil(project.bytes*8/getWidth()));
+        name.querySelector('b').textContent=project.short||project.name;name.title=project.name;
+        const size=document.createElement('td');size.textContent=project.size;size.dataset.short=project.id==='linux'?'154.9MiB':project.size.replace(' ','');
+        const binary=document.createElement('td');binary.textContent=project.bytes===null?'—':number(project.bytes*8);binary.dataset.short=project.bytes===null?'—':compact(project.bytes*8);binary.title=binary.textContent;
+        const symbols=document.createElement('td');symbols.textContent=project.bytes===null?'—':number(Math.ceil(project.bytes*8/getWidth()));symbols.dataset.short=project.bytes===null?'—':compact(Math.ceil(project.bytes*8/getWidth()));symbols.title=symbols.textContent;
         if(project.bytes===null){binary.className='not-available';symbols.className='not-available';}
         tr.append(name,size,binary,symbols);
         const activate=()=>{select.value=project.id;update();};
@@ -141,7 +185,7 @@
       setLabel($('visual-ratio'),count===null?'Needs measured source bytes':`${width}× fewer than binary digits`);
       $('symbol-meter').style.width=`${100/width}%`;
       setLabel($('explorer-note'),project.bytes===null?
-        'Linux metric is a count of code lines, not binary bytes. To calculate tokens, first measure a specific source archive or file.':
+        'Only source-line counts are available. To calculate source tokens, measure the raw source bytes first.':
         `${project.description}. The symbol count is an idealized ${width}-bit token model; preview glyphs illustrate the 8-bit alphabet only. It does not measure storage or actual compressed size.`);
     }
     select.addEventListener('change',update);slider.addEventListener('input',update);
@@ -166,7 +210,7 @@
       $('file-feedback').textContent=`${file.name} · ${number(file.size)} bytes · local size only`;
       update();
     });}
-    initGamma();redrawMessage();update();
+    initGamma();initGlyphLab();initMobileScenes();redrawMessage();update();
   }
   function initGamma() {
     const slider=$('gamma-slider');if(!slider)return;
@@ -194,21 +238,65 @@
       buttons.forEach((button,index)=>{const active=bin[index]==='1';button.textContent=bin[index];button.classList.toggle('on',active);button.setAttribute('aria-pressed',String(active));});
       squares.forEach((square,index)=>{square.classList.toggle('selected',index===value);square.setAttribute('aria-selected',String(index===value));});
       const tile=$('gamma-tile');tile.replaceChildren(createTile(value));tile.setAttribute('aria-label',`Visual tile for ${value}: ${bin}`);
+      $('gamma-native-glyph')?.replaceChildren(createNativeGlyph(value));
+      document.dispatchEvent(new CustomEvent('binball:bytechange',{detail:value}));
     }
     function setText(id,v){const el=$(id);if(el)el.textContent=v;}
     function stopAnimation(){if(animation!==null){clearInterval(animation);animation=null;}setText('gamma-play','▶ Animate');}
     $('gamma-zero').addEventListener('click',()=>{stopAnimation();setValue(0);});
     $('gamma-max').addEventListener('click',()=>{stopAnimation();setValue(255);});
     $('gamma-random').addEventListener('click',()=>{stopAnimation();setValue(Math.floor(Math.random()*256));});
-    slider.addEventListener('input',e=>setValue(e.target.value));
+    slider.addEventListener('input',e=>{stopAnimation();setValue(e.target.value);});
     $('gamma-play').addEventListener('click',()=>{
       if(animation!==null){stopAnimation();return;}
       setText('gamma-play','Ⅱ Pause');
       animation=setInterval(()=>setValue((value+1)&255),95);
     });
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAnimation();});
+    const statesToggle=$('states-toggle');
+    statesToggle?.addEventListener('click',()=>{const open=document.body.classList.toggle('states-open');statesToggle.setAttribute('aria-expanded',String(open));statesToggle.textContent=open?'Hide 256-state map ▴':'256-state map ▾';});
     setValue(value);
   }
+  function initGlyphLab(){
+    const shapes=$('shape-select');if(!shapes)return;
+    let value=78;
+    for(let i=0;i<16;i++){const o=document.createElement('option');o.value=String(i);o.textContent=`${i.toString(16).toUpperCase()} · ${['Hex','Diamond','Crescent','Spark','Crest','Zigzag','Wave','Cross','Rune','Arch','Spiral','Twin','Triangle','Parallel','Orbits','Shield'][i]}`;shapes.append(o);}
+    const colors=$('glyph-colors');
+    for(let i=0;i<16;i++){
+      const b=document.createElement('button');b.type='button';b.className='color-choice';b.title=`Color index ${i}`;
+      b.setAttribute('aria-label',`Select color index ${i}`);b.style.setProperty('--swatch',spectrum[i]);
+      b.addEventListener('click',()=>setLabValue((value&240)+i,true));colors.append(b);
+    }
+    function setText(id,v){const el=$(id);if(el)el.textContent=v;}
+    function setLabValue(next,sync){
+      value=Number(next)&255;const hi=value>>4,lo=value&15;
+      shapes.value=String(hi);setText('color-index',`${lo} / 15`);
+      setText('shape-label',`Shape ${hi}`);setText('color-label',`Color ${lo}`);
+      setText('glyph-decimal',String(value));setText('glyph-state',String(value));
+      setText('glyph-binary',value.toString(2).padStart(8,'0').replace(/(.{4})/,'$1 '));
+      const palette=$('glyph-palette-type').value;
+      [...colors.children].forEach((b,i)=>{b.classList.toggle('selected',i===lo);b.setAttribute('aria-pressed',String(i===lo));b.style.setProperty('--swatch',(palette==='luminance'?luminance:spectrum)[i]);});
+      $('glyph-stage-main').replaceChildren(createNativeGlyph(value));
+      $('pure-swatch').replaceChildren(createNativeGlyph(value));
+      $('classic-swatch').replaceChildren(createTile(value));
+      if(sync){const gamma=$('gamma-slider');gamma.value=String(value);gamma.dispatchEvent(new Event('input',{bubbles:true}));}
+    }
+    shapes.addEventListener('change',()=>setLabValue((Number(shapes.value)<<4)+(value&15),true));
+    $('glyph-palette-type').addEventListener('change',()=>setLabValue(value,true));
+    document.addEventListener('binball:bytechange',(e)=>setLabValue(e.detail,false));
+    setLabValue(value,false);
+  }
+  function initMobileScenes(){
+    const tabs=Array.from(document.querySelectorAll('[data-mobile-target]'));if(!tabs.length)return;
+    const pages=['archive','compare','gamma','glyphs','message','research'];
+    function show(name){const next=pages.includes(name)?name:'archive';document.body.dataset.mobileScreen=next;
+      tabs.forEach(t=>{const active=t.dataset.mobileTarget===next;t.classList.toggle('active',active);t.setAttribute('aria-pressed',String(active));});
+      if(window.matchMedia('(max-width: 760px)').matches)window.scrollTo({top:0,behavior:'instant'});
+    }
+    tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.mobileTarget)));
+    const fromHash=()=>{if(location.hash==='#gamma')show('gamma');else if(location.hash==='#glyph-lab')show('glyphs');else if(location.hash==='#sources')show('research');};
+    window.addEventListener('hashchange',fromHash);show('archive');fromHash();
+  }
   if($('copyright-year'))$('copyright-year').textContent=new Date().getFullYear();
-  initBinaryLogo();initRain();initExplorer();
+  initBinaryLogo();initFeaturePager();initRain();initExplorer();
 })();
