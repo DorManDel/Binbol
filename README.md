@@ -6,7 +6,9 @@
 
 ## Try it
 
-- **[Launch the interactive research studio](./index.html)** — offline-ready, self-contained HTML.
+- **[Open the new Binball landing page](./index.html)** — digital rain, binary wordmark and liquid-glass visual design.
+- **[Try the Symbol Explorer and Gamma Live lab](./explorer.html)** — project comparisons, 8-bit / 256-state interactive demo.
+- **[Launch the original interactive research studio](./studio.html)** — preserved offline-ready research tools.
 - **[Open the binary / MicroGlyph lab](./lab.html)** — standalone educational binary exploration.
 - **[Mobile-friendly offline copy](./Binbol-Mobile.html)**.
 - For a hosted phone URL, enable **Settings → Pages → Build and deployment → GitHub Actions**. The deployment workflow is in `.github/workflows/pages.yml`. The live site is not assumed active until deployment succeeds.
@@ -52,3 +54,8 @@ The current virtual machine is an educational, restricted interpreter; the proje
 3. Add reproducible benchmarks for shared vs embedded dictionaries, Huffman/BPE/varints, and performance.
 4. Explore adaptive instruction profiles (8/16/32/64-bit) and compare compact vs aligned access.
 5. Keep security and cryptographic mechanisms separate from encoding and rendering.
+
+
+## Binball visual website (2026-11-18)
+
+The GitHub Pages entry point is now the visual **Binball** landing page. The repository retains the historical **Binbol** project spelling, experiment data and documentation. The original root `index.html` research studio is preserved as `studio.html`; `lab.html` remains unchanged. Read [README-SITE.md](README-SITE.md) for measurement caveats and local instructions.
