@@ -26,7 +26,7 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: binbol-preview
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout preview branch
