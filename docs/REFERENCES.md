@@ -31,3 +31,10 @@ This is a collection of **inspiration and baselines**, not evidence of a unique 
 ## Important distinction
 
 *Adaptive Instruction Profiles* is our proposed design idea: a configuration for ID width, dictionary policy, byte alignment, VM instruction layout and target device. It is not an established universal standard. Its value must be proven experimentally.
+## Dictionary of dictionaries — additional inspirations
+
+- [Forth / Starting Forth](https://www.forth.com/starting-forth/1-forth-stacks-dictionary/): dictionary-defined words built from other words. Our experiment: nested recipes and lookup overhead.
+- [Piet programming language](https://www.dangermouse.net/esoteric/piet.html): picture-like programs built from colored regions. Our experiment: keep binary semantics separate from tile rendering.
+- [VQ-VAE](https://arxiv.org/abs/1711.00937): learned quantized codebooks. Our experiment: compare lossy media codebooks with exact, lossless code/message dictionaries.
+
+The presence of prior art does not prove that Binbol is faster or smaller. Compare total stored bytes, dictionary distribution, expansion costs, and robust round-trip behavior.
