@@ -15,6 +15,7 @@ const DEFAULT=()=>({format:'binbol.layout.v1',version:1,enabled:Object.fromEntri
 const safeGet=k=>{try{return localStorage.getItem(k)}catch{return null}};
 const safeSet=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 const validColor=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
+if (new URLSearchParams(location.search).get('dev')==='1') document.body.classList.add('dev-preview');
 const validLink=v=>typeof v==='string'&&(/^(https?:\/\/[^\s]+|(?:explorer|studio|index|dev)\.html(?:#[a-z0-9_-]+)?)$/i.test(v));
 function validate(data){const d=DEFAULT();if(!data||typeof data!=='object')return d;
  for(const k of Object.keys(d.enabled))if(typeof data.enabled?.[k]==='boolean')d.enabled[k]=data.enabled[k];
@@ -69,7 +70,7 @@ function init(){apply(false);const tabs=document.querySelectorAll('[data-tab]');
  $('open-dev-shortcut')?.addEventListener('click',()=>{location.href='dev.html'});
  const brand=document.querySelector('.brand');let count=0,last=0;brand?.addEventListener('click',e=>{e.preventDefault();const t=Date.now();if(t-last>2000)count=0;last=t;count++;if(count>=5){count=0;reveal()}});
  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='b'){e.preventDefault();reveal()}if(e.ctrlKey&&e.altKey&&e.key.toLowerCase()==='s'){e.preventDefault();$('settings-open')?.click()}});
- function reveal(){const devLink=document.querySelector('.studio-dev-entry');if(devLink)devLink.hidden=false;const existing=document.querySelector('.dev-pop');existing?.remove();const pop=control('div',{className:'dev-pop'});const a=control('a',{href:'dev.html'},'Open Component Library →');pop.append('Developer workspace unlocked · ',a);document.body.append(pop);setTimeout(()=>pop.remove(),6500)}
+ function reveal(){document.body.classList.add('dev-preview');const devLink=document.querySelector('.studio-dev-entry');if(devLink)devLink.hidden=false;const existing=document.querySelector('.dev-pop');existing?.remove();const pop=control('div',{className:'dev-pop'});const a=control('a',{href:'dev.html'},'Open Component Library →');pop.append('Developer workspace unlocked · ',a);document.body.append(pop);setTimeout(()=>pop.remove(),6500)}
  // Local preview synchronization from the dev gallery editor; no network.
  window.addEventListener('storage',e=>{if(e.key===key){try{state=validate(JSON.parse(e.newValue||'{}'));apply(false)}catch{}}});
 }
