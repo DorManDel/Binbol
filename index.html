@@ -67,12 +67,12 @@
   <div class="ambient ambient-left"></div><div class="ambient ambient-right"></div>
   <header class="topbar wrap">
     <a href="#top" class="wordmark" aria-label="Binbol home"><span class="logo">◈</span><span>BIN<span class="gold">BOL</span></span></a>
-    <nav aria-label="Primary"><a href="#why">Concept</a><a href="#pipeline">Pipeline</a><a href="#transfer">Network Lab</a><a href="#language">GlyphScript</a><a href="#dictionary">Dictionary</a><a href="#security">Security</a><a href="#roadmap">Roadmap</a></nav>
+    <nav aria-label="Primary"><a href="#why">Concept</a><a href="#pipeline">Pipeline</a><a href="#transfer">Network Lab</a><a href="#language">GlyphScript</a><a href="#dictionary">Dictionary</a><a href="dictionary-lab.html">Dictionary Lab ↗</a><a href="#security">Security</a><a href="#roadmap">Roadmap</a></nav>
     <a class="lab-link" href="#transfer">Open network lab <span aria-hidden="true">↗</span></a>
   </header>
   <main id="top" class="wrap">
     <section class="hero">
-      <div class="eyebrow"><span class="live-dot"></span> EXPERIMENTAL RESEARCH · V0.4</div>
+      <div class="eyebrow"><span class="live-dot"></span> EXPERIMENTAL RESEARCH · V0.5</div>
       <h1>Encode the meaning.<br><em>Visualize the bits.</em></h1>
       <p class="lead">Build a language where one semantic instruction can be written as a word, a visual glyph, or a binary identifier. Verify what really becomes smaller, faster, or easier to understand.</p>
       <div class="hero-actions"><a class="btn primary" href="#transfer">Try the network demo <span aria-hidden="true">↗</span></a><a class="btn ghost" href="#transfer">Explore network encoding</a></div>
@@ -191,6 +191,15 @@ PRINT</textarea></label>
       </article>
       <article class="glass work-card"><div class="card-title"><h3>Current dictionary</h3><small id="dict-count">—</small></div><div id="dict-list" class="dict-list"></div><p class="micro">Built-in instructions have fixed opcodes. Custom symbols are source-level macros and may expand into multiple instructions; their JSON dictionary is required to interpret custom source files.</p></article></div>
     </section>
+<section id="registry-explorer" class="section">
+<div class="section-head"><div><span class="eyebrow">NEW / DICTIONARY REGISTRY V1</span><h2>A whole program, inside a tile.</h2></div><p>Create code and message dictionaries, expand nested recipes, and simulate transferring exact byte packets between two computers. Open the new interactive lab below.</p></div>
+<div class="three-grid">
+<article class="glass tile"><span class="tile-icon">🛡</span><h3>CHECK_PLAYER recipe</h3><p>One symbolic ID refers to four separate actions. Tap its tile to inspect each reference and its exact expansion.</p></article>
+<article class="glass tile"><span class="tile-icon purple">▣</span><h3>Dictionary of dictionaries</h3><p>Choose Code, Testing, or Messages. Add your own text or recipe definitions, and detect circular references.</p></article>
+<article class="glass tile"><span class="tile-icon yellow">⇄</span><h3>Two computers</h3><p>Copy a BND1 packet between devices or share a binary file. Compare pre-shared and embedded dictionary costs.</p></article>
+</div>
+<div class="glass" style="padding:20px;margin-top:16px"><a class="btn primary" href="dictionary-lab.html">Open Dictionary Registry Lab ↗</a><p class="micro" style="margin-top:13px">The new lossless BND1 proof-of-concept is separate from the existing BNB1 protocol. This is not encryption and does not execute C code.</p></div>
+</section>
 <section id="security" class="section">
   <div class="section-head"><div><span class="eyebrow">07 / SECURITY RESEARCH</span><h2>Hidden meaning is not encryption.</h2></div><p>Binbol can compact or disguise familiar phrases, but a private dictionary cannot guarantee confidentiality or integrity. Security is an independent layer, with its own costs and threat model.</p></div>
   <div class="security-cards">
