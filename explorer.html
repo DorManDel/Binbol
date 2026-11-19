@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#030d10">
+  <meta name="description" content="BinBol Symbol Explorer — compare historical projects in binary and visual symbols. Experiment with every one of the 256 possible 8-bit states.">
+  <title>Symbol Explorer — BinBol</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJCaW5Cb2wgbG9nbzogYmluYXJ5IGJlY29tZXMgZ2x5cGgiPgogIDxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0icmltIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzNhZmZjNCIvPjxzdG9wIG9mZnNldD0iLjQ4IiBzdG9wLWNvbG9yPSIjNDllNmY1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYmE4NWZmIi8+PC9saW5lYXJHcmFkaWVudD48ZmlsdGVyIGlkPSJnbG93Ij48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxIiByZXN1bHQ9ImIiLz48ZmVNZXJnZT48ZmVNZXJnZU5vZGUgaW49ImIiLz48ZmVNZXJnZU5vZGUgaW49IlNvdXJjZUdyYXBoaWMiLz48L2ZlTWVyZ2U+PC9maWx0ZXI+PC9kZWZzPgogIDxwYXRoIGQ9Ik0zMiA0IDU1IDE3LjV2MjlMMzIgNjAgOSA0Ni41di0yOXoiIGZpbGw9IiMwNjFhMjEiIGZpbGwtb3BhY2l0eT0iLjgyIiBzdHJva2U9InVybCgjcmltKSIgc3Ryb2tlLXdpZHRoPSIyLjciIGZpbHRlcj0idXJsKCNnbG93KSIvPgogIDxwYXRoIGQ9Ik0zMiA0djU2TTkgMTcuNSAzMiAzMWwyMy0xMy41TTkgNDYuNSAzMiAzMWwyMyAxNS41IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjcmltKSIgc3Ryb2tlLW9wYWNpdHk9Ii40OCIgc3Ryb2tlLXdpZHRoPSIxLjEiLz4KICA8ZyBmaWxsPSIjNjVmZmRiIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPjx0ZXh0IHg9IjEyIiB5PSIyNCI+MDwvdGV4dD48dGV4dCB4PSIyMSIgeT0iMjkiPjE8L3RleHQ+PHRleHQgeD0iMTMiIHk9IjM4Ij4xPC90ZXh0Pjx0ZXh0IHg9IjIzIiB5PSI0NCI+MDwvdGV4dD48L2c+CiAgPGcgc3Ryb2tlPSIjZDNhMmZmIiBzdHJva2Utd2lkdGg9IjEuNzUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsdGVyPSJ1cmwoI2dsb3cpIj48cGF0aCBkPSJtNDMgMjQgMi40IDYuNSA2LjUgMi41LTYuNSAyLjMtMi40IDYuNy0yLjMtNi43LTYuNy0yLjMgNi43LTIuNXoiLz48cGF0aCBkPSJtNDAgMTUgMyAzLTMgMy0zLTN6Ii8+PC9nPgo8L3N2Zz4K" type="image/svg+xml">
+  <style>
+:root{color-scheme:dark;--bg:#030c10;--surface:rgba(11,31,39,.62);--line:rgba(138,236,239,.16);--light:#f0fbff;--muted:#9db4c2;--mint:#52ffba;--cyan:#5ce9f8;--violet:#c28cff;--radius:30px;--shadow:0 20px 80px #0009}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 50% -20%,#103b3f 0%,#061318 39%,#030b0f 72%);color:var(--light);font:15px/1.55 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #75f3fd;outline-offset:4px}::selection{background:#45dfc67a;color:white}h1,h2,h3,p{margin:0}#symbol-rain{position:fixed;inset:0;width:100%;height:100%;z-index:-2;opacity:.84;pointer-events:none}.aurora{position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(105px);opacity:.2}.aurora-a{top:5%;left:5%;background:#08b878;width:460px;height:400px}.aurora-b{right:-7%;top:12%;background:#8654c2;width:540px;height:500px}.site-shell{max-width:1640px;margin:auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 clamp(18px,4.5vw,75px);position:relative}.site-header{display:flex;align-items:center;gap:24px;justify-content:space-between;min-height:86px;z-index:10}.brand{display:inline-flex;align-items:center;gap:13px;font-size:clamp(20px,1.5vw,26px);font-weight:760;letter-spacing:-.8px;white-space:nowrap}.brand-crystal{width:43px;height:43px;display:inline-grid;place-items:center;filter:drop-shadow(0 0 10px #4affc85b)}.brand-crystal svg{width:100%;height:100%}.primary-nav{display:flex;align-items:center;gap:clamp(8px,2.4vw,43px)}.primary-nav a{font-size:14px;color:#bfd0d9;padding:8px 15px;border-radius:99px;transition:background .25s,color .25s}.primary-nav a:hover,.primary-nav a.active{color:white;background:linear-gradient(110deg,rgba(64,253,185,.12),rgba(72,203,245,.13));box-shadow:inset 0 0 0 1px #b6ffef25,0 0 24px #19dcdf21}.glass-button{padding:9px 23px;min-height:43px;border-radius:99px;background:linear-gradient(105deg,#0d4c4eaa,#2f1e58b0);box-shadow:inset 0 1px 2px #ffffff7a,inset 0 0 0 1px #cefff073,0 5px 28px #75f4e630;font-weight:700;font-size:13px;white-space:nowrap;transition:transform .25s,box-shadow .25s}.glass-button:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px #adffe5,0 10px 40px #75f4e650}.home-main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:35px;max-width:1370px;width:100%;margin:auto;padding:29px 0 30px}.liquid-panel{isolation:isolate;position:relative;background:linear-gradient(125deg,rgba(8,57,58,.31),rgba(7,31,42,.7) 40%,rgba(35,24,62,.53));border:1px solid rgba(184,255,245,.27);box-shadow:inset 0 1px 1px #e6ffff50,inset 0 -2px 14px #6ceefb15,0 18px 56px #0008,0 0 65px #23fbc21b;backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35);overflow:hidden}.liquid-panel:before{content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;z-index:-1;background:radial-gradient(ellipse at 7% 1%,#a1ffdf30,transparent 33%),radial-gradient(ellipse at 93% 92%,#bd70ff29,transparent 30%),linear-gradient(180deg,#ffffff12,transparent 23%,transparent 73%,#0cf5d40b)}.liquid-panel:after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;border:1px solid transparent;background:linear-gradient(115deg,#8ffffc88,transparent 32%,transparent 64%,#dc8dff9a) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}.hero-glass{border-radius:clamp(27px,4.3vw,64px);padding:53px 7% 56px;text-align:center;min-height:465px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 2px 3px #ffffff85,inset 0 -3px 12px #60f5ff3d,0 20px 62px #000b,0 0 55px #13ffc336}.hero-topline{font-size:10px;letter-spacing:4px;font-weight:780;color:#adf5ea;display:flex;align-items:center;gap:14px;margin-bottom:24px;opacity:.82}.tiny-spark{color:#ae91ff;font-size:18px}.hero-mark{display:flex;align-items:center;justify-content:center;gap:clamp(7px,2vw,34px);width:100%;height:181px;max-width:1060px}.binary-word{display:flex;align-items:center;gap:7px;height:160px;filter:drop-shadow(0 0 8px #26f2bd70)}.binary-letter{display:grid;grid-auto-rows:1fr;gap:0;line-height:1;min-width:0;align-content:center}.binary-letter span{font:900 clamp(8px,.95vw,14px)/1.05 ui-monospace,SFMono-Regular,Consolas,monospace;display:block;white-space:pre;color:#60ffcf;text-shadow:0 0 10px #4bffc58f;letter-spacing:.05em}.symbol-word{width:min(45%,490px);height:172px;display:grid;place-items:center;filter:drop-shadow(0 0 17px #946efd50)}.glyph-logo{width:100%;height:100%;overflow:visible}.hero-subtitle{font-size:clamp(26px,3.1vw,47px);letter-spacing:.2px;font-weight:320;line-height:1.18;color:#e3fbff;text-shadow:0 4px 35px #5effbf3d}.hero-lead{font-size:14px;margin:13px 0 27px;color:#b6cccf}.hero-lead span{color:#73f8d7}.hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}.button{display:inline-flex;min-width:220px;align-items:center;justify-content:center;gap:13px;border-radius:99px;min-height:52px;padding:12px 22px;font-weight:760;font-size:15px;transition:transform .25s,filter .25s,box-shadow .25s}.button:hover{transform:translateY(-3px);filter:brightness(1.11)}.button-primary{background:linear-gradient(100deg,#4fff9c,#13dfd5 70%,#32bce9);color:#062528;box-shadow:inset 0 1px 2px #ffffffd4,0 8px 36px #19efa65d}.button-primary span{font-size:11px}.button-secondary{background:linear-gradient(110deg,#062b367c,#202c50a3);border:1px solid #98dfea89;box-shadow:inset 0 2px 5px #c7fbfb26;color:#ecfbff}.button-glyph{font-size:24px;color:#79f4e9}.glass-corner{position:absolute;pointer-events:none;width:200px;height:200px;border-radius:50%;filter:blur(31px);opacity:.22}.corner-1{background:#06ffaa;bottom:-165px;left:1%}.corner-2{background:#b67eff;top:-176px;right:-2%}.feature-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}.feature-card{min-height:119px;display:flex;align-items:center;gap:21px;padding:22px 24px;border-radius:23px;transition:transform .25s,background .25s;box-shadow:inset 0 1px 1px #ffffff3f,0 10px 35px #0007}.feature-card:hover{transform:translateY(-4px);background:linear-gradient(120deg,#114744ba,#1a2547c5)}.feature-icon{font-size:45px;line-height:1;width:58px;text-align:center;flex:none;font-weight:200}.mint{color:var(--mint)}.cyan{color:var(--cyan)}.violet{color:var(--violet)}.feature-card strong{font-size:16px;display:block;margin-bottom:4px}.feature-card small{font-size:12px;color:#b2c6c9;display:block;line-height:1.5}.feature-arrow{margin-left:auto;align-self:flex-start;font-size:16px;color:#b0cacc;opacity:.5}.site-footer{max-width:1370px;width:100%;margin:0 auto;display:flex;gap:16px;justify-content:space-between;align-items:center;padding:15px 0 27px;font-size:10px;letter-spacing:1px;color:#89a6b1;position:relative;z-index:1}.site-footer a:hover{color:var(--mint)}.liquid-wave{position:fixed;pointer-events:none;z-index:-1;bottom:-100px;left:-10%;width:120%;height:160px;opacity:.9;filter:blur(.2px)}.liquid-wave span{position:absolute;width:100%;height:155px;border-top:2px solid #4cffe89c;border-radius:50% 55% 0 0;transform:rotate(-2deg);box-shadow:0 -6px 35px #36e6ff36}.liquid-wave span:nth-child(2){bottom:30px;border-color:#bf81ff93;transform:rotate(3deg);width:60%;left:40%;opacity:.6}.liquid-wave span:nth-child(3){bottom:-20px;left:-15%;width:80%;border-color:#28ff9c80;transform:rotate(2deg)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+/* Explorer */
+.explorer-main{flex:1;width:100%;max-width:1510px;margin:6px auto 40px;display:flex;flex-direction:column;gap:17px}.explorer-heading{width:100%;border-radius:29px;min-height:172px;padding:24px 30px 18px;text-align:center}.eyebrow,.section-overline{font-weight:760;font-size:10px;letter-spacing:2.5px;color:#7efde0}.explorer-heading h1{font-size:clamp(30px,3vw,44px);letter-spacing:-1.7px;line-height:1.15;margin:7px 0 4px}.explorer-heading h1 em,.gamma-heading h2 em{font-style:normal;background:linear-gradient(95deg,#7bffe0,#68dfff,#ba93ff);color:transparent;background-clip:text}.explorer-heading p{font-size:13px;color:#b0cbd1}.mode-switch{display:flex;gap:6px;justify-content:center;margin:16px auto 0;background:#05171d8a;width:max-content;border:1px solid #b0e1e328;padding:4px;border-radius:999px}.mode-button{background:transparent;color:#b3c7ca;border:0;border-radius:999px;padding:7px 27px;font-size:12px;font-weight:700;min-width:103px}.mode-button.active{background:linear-gradient(90deg,#13b8887c,#1b9ccc75,#5a3aa779);color:white;box-shadow:inset 0 1px 1px #dbfff78c,0 0 20px #1de6cb47}.explorer-topgrid{display:grid;grid-template-columns:1fr 1.43fr;gap:17px;align-items:stretch}.lab-panel{border-radius:25px;padding:23px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:19px;gap:10px}.panel-head h2{font-size:21px;line-height:1.2;letter-spacing:-.6px;margin:6px 0 3px}.panel-head p{color:#a6bdc5;font-size:12px}.panel-icon{color:var(--mint);font-size:30px;line-height:1}.project-table-wrap{overflow-x:auto}.project-table{border-collapse:separate;border-spacing:0 9px;width:100%;font-variant-numeric:tabular-nums}.project-table th{color:#83a8b2;font-size:10px;text-transform:uppercase;letter-spacing:.6px;text-align:right;font-weight:650;white-space:nowrap;padding:0 8px 3px}.project-table th:first-child{text-align:left}.project-table tr td{background:linear-gradient(90deg,#10433f67,#12343f66 50%,#44346365);padding:12px 8px;font-size:12px;border-top:1px solid #98fff41f;border-bottom:1px solid #98fff41f;white-space:nowrap;text-align:right}.project-table td:first-child{text-align:left;border-radius:13px 0 0 13px}.project-table td:last-child{border-radius:0 13px 13px 0}.project-table tbody tr{cursor:pointer;transition:filter .2s}.project-table tbody tr:hover,.project-table tbody tr.selected{filter:brightness(1.3)}.project-table tbody tr.selected td{background:linear-gradient(90deg,#0b745c99,#175d7388,#58417a9c);border-color:#75ffcc66}.project-name{display:flex;align-items:center;gap:9px}.project-emoji{width:26px;height:26px;font-size:19px;display:grid;place-items:center}.project-name b{font-weight:700}.project-table .not-available{color:#7593a2;font-size:10px}.panel-footnote{color:#90aab3;font-size:11px;line-height:1.55;margin-top:14px}.panel-footnote a{color:#83e4e5;text-decoration:underline;text-decoration-color:#83e4e54e;text-underline-offset:3px}.panel-footnote a:hover{color:white}.explorer-controls{display:grid;grid-template-columns:1fr 1fr;gap:19px;margin:5px 0 16px}.field-label{display:flex;flex-direction:column;gap:9px;font-size:11px;color:#bfdae0;font-weight:700}.field-label select{appearance:auto;background:#0b2935;color:white;border:1px solid #81daec6c;border-radius:13px;padding:10px 12px;max-width:100%;width:100%;height:43px;font-size:12px}.width-field span{align-self:flex-start;color:#74f5db;font-size:11px}.width-field input{margin:5px 0 0;width:100%}input[type=range]{accent-color:#5aefdc;cursor:pointer}.file-upload{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:-3px 0 13px}.file-upload-button{display:inline-flex;align-items:center;padding:7px 12px;font-size:11px;font-weight:760;color:#bdfbed;border-radius:10px;border:1px solid #86e8de4e;background:#103b4188;cursor:pointer}.file-upload-button:hover{background:#175b56}.file-upload input{position:absolute;width:1px;height:1px;opacity:.01}.file-upload input:focus-visible+.file-upload-button{outline:2px solid #72fcee}.file-upload span{font-size:10px;color:#88abb5;overflow-wrap:anywhere}.conversion-flow{display:grid;grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr) 14px minmax(0,1fr);align-items:stretch;gap:8px}.conversion-node{min-width:0;border-radius:18px;padding:13px 10px;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #9edaff45;background:linear-gradient(140deg,#1549408c,#102631b5);box-shadow:inset 0 0 20px #22e9cc13}.byte-node{background:linear-gradient(140deg,#0b3a57a3,#102136a8)}.symbol-node{background:linear-gradient(140deg,#193451a3,#31204dbe);border-color:#ba9aff55}.conversion-label{font-size:10px;color:#dcfdfd;font-weight:800;margin-bottom:9px;letter-spacing:.2px}.conversion-example{white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis;font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:#7effe0;display:block;line-height:1.7;margin-bottom:12px}.conversion-node strong{font-size:clamp(14px,1.5vw,21px);letter-spacing:-.5px;line-height:1.4}.conversion-node small{font-size:10px;color:#95b4be}.flow-chevron{display:grid;place-items:center;color:#57e9ef;font-size:30px}.symbol-preview{display:flex;align-items:center;justify-content:center;min-height:30px;gap:2px;margin-bottom:8px;overflow:hidden;max-width:100%}.comparison-summary{margin-top:13px;border-radius:14px;background:#0e39408c;border:1px solid #97fdeb31;display:grid;grid-template-columns:1fr .78fr;gap:15px;align-items:center;padding:12px 16px}.comparison-summary span{font-size:11px;color:#b4cdd0;display:block}.comparison-summary strong{display:block;color:#f0ffff;font-size:16px}.comparison-bars{display:flex;flex-direction:column;gap:8px}.meter-track{height:9px;border-radius:20px;background:#071d25;border:1px solid #70a8bd25;overflow:hidden}.meter-fill{height:100%;border-radius:20px}.binary-fill{width:100%;background:linear-gradient(90deg,#37ff9f,#2bdbef)}.symbol-fill{width:12.5%;background:linear-gradient(90deg,#7ee4fd,#cc8aff);transition:width .32s ease}.mode-binary .byte-node,.mode-binary .symbol-node{opacity:.28}.mode-symbols .binary-node,.mode-symbols .byte-node{opacity:.28}
+/* Gamma lab */
+.gamma-panel{border-radius:28px;padding:24px 28px 26px;scroll-margin-top:25px}.gamma-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}.gamma-heading h2{font-size:30px;letter-spacing:-.9px;margin:1px 0}.gamma-heading p{font-size:13px;color:#c4d6dd}.gamma-heading p strong{color:#86ffe0}.gamma-cta{border:1px solid #94ffcf56;border-radius:30px;background:#0e5c4b57;color:#98ffe1;font-size:10px;font-weight:800;letter-spacing:1.7px;padding:8px 14px;white-space:nowrap}.status-pulse{width:7px;height:7px;display:inline-block;border-radius:50%;background:#3afeb3;margin-right:8px;box-shadow:0 0 12px #2fff97;animation:pulse 2s infinite}@keyframes pulse{50%{opacity:.35;box-shadow:0 0 22px #2fff97}}.gamma-layout{display:grid;grid-template-columns:1.2fr .78fr 1fr;gap:26px;align-items:stretch}.gamma-left{min-width:0;padding-right:3px}.gamma-explanation{font-size:13px;line-height:1.75;color:#bdcfd6;max-width:480px;min-height:64px}.gamma-explanation strong{color:#77ffe0;font-size:16px}.gamma-explanation em{font-style:normal;color:#ecfeff}.range-header{display:flex;align-items:baseline;gap:7px;font-size:12px;font-weight:720;color:#b2d7da;margin-top:14px}.range-header output{margin-left:auto;font-size:27px;color:#75ffe0;font-weight:850;font-variant-numeric:tabular-nums}.range-header span{font-size:12px;color:#83a7ae}.gamma-left input[type=range]{width:100%;margin:9px 0 17px;height:5px}.gamma-bits{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px}.bit-button{min-width:0;min-height:43px;border-radius:9px;background:#102c37;border:1px solid #77e8ed45;color:#92cfd9;font:760 clamp(12px,1.4vw,19px) ui-monospace,Consolas,monospace;transition:background .15s,box-shadow .15s}.bit-button.on{background:linear-gradient(150deg,#0f845c,#156b82);border-color:#7bfbe3;box-shadow:0 0 16px #2fedbb23,inset 0 2px 4px #beffe938;color:#fff}.gamma-actions{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.small-button{padding:8px 12px;border-radius:10px;border:1px solid #95d9ea43;background:#19343e88;color:#d5ecf0;font-size:11px;font-weight:740}.small-button:hover{background:#27576b9a}.small-button.accented{border-color:#a58af77a;background:linear-gradient(100deg,#175a59ad,#523c76a6);color:#e8fdff}.gamma-notation{display:flex;gap:10px;flex-wrap:wrap;color:#9cbfc3;font-size:10px}.gamma-notation span{background:#071c2591;border:1px solid #3c727d5b;border-radius:9px;padding:7px 10px}.gamma-notation code{display:block;color:#dcffff;font-size:13px;font-weight:780;margin-top:3px}.gamma-center{min-width:0;border-left:1px solid #9dffff1b;border-right:1px solid #9dffff1b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:8px 12px;text-align:center}.state-caption{font-size:11px;color:#b4d2d7}.single-cell{width:clamp(88px,8.5vw,139px);aspect-ratio:1;border-radius:26px;background:linear-gradient(145deg,#0d6559c4,#234d78c0 54%,#533c8dbb);border:1px solid #b7f8fbd9;box-shadow:inset 0 3px 7px #f2ffff5f,inset 0 -6px 22px #dba4ff36,0 0 37px #8fe9fe45;display:grid;place-items:center;transform:rotate(-4deg);transition:transform .2s}.single-cell:hover{transform:rotate(0) scale(1.06)}.single-cell .glyph-tile{width:85%;height:85%;background:transparent;border:0;box-shadow:none}.single-cell .glyph-tile .glyph-primary{font-size:56px}.single-cell .glyph-tile .glyph-secondary{font-size:27px}.state-label{letter-spacing:1.8px;font:800 11px ui-monospace,monospace;color:#a0fce9}.cell-foot{color:#819fae;font-size:10px}.gamma-right{min-width:0}.states-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:13px}.states-heading strong{font-size:13px}.states-heading span{font-size:10px;color:#8dadb3}.states-grid{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:3px;max-width:370px;width:100%;aspect-ratio:1;margin:auto}.state-square{min-width:0;min-height:0;border:0;border-radius:3px;background:hsl(var(--hue),79%,54%);opacity:.68;cursor:pointer;transition:transform .1s,opacity .1s;box-shadow:0 0 4px hsl(var(--hue),80%,60%,.1);padding:0}.state-square:hover{opacity:1;transform:scale(1.16);z-index:1}.state-square.selected{opacity:1;outline:2px solid white;outline-offset:1px;z-index:2;box-shadow:0 0 13px white}.grid-help{text-align:center;font-size:10px;color:#83a4ad;margin-top:11px}
+/* lower panels */
+.lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.mini-playground textarea{width:100%;border-radius:13px;border:1px solid #83d8e94d;background:#071d28ac;color:#e7fbff;padding:11px 14px;resize:vertical;outline:none}.mini-playground textarea:focus{border-color:#77fbe7}.sample-metrics{display:flex;flex-wrap:wrap;gap:15px;margin-top:9px;font-size:11px;color:#97bcc5}.sample-metrics strong{color:#e9fbff}.live-sample{display:flex;gap:5px;overflow:auto;min-height:60px;align-items:center;margin-top:9px;padding-bottom:5px}.glyph-tile{position:relative;display:inline-grid;place-items:center;flex:none;width:32px;height:39px;border:1px solid #80e3ed49;border-radius:9px;background:linear-gradient(145deg,#0b4144aa,#26204da3);box-shadow:inset 0 1px 2px #efffff2d;overflow:hidden}.glyph-primary{font:28px/1 Georgia,serif;color:#77f6ef;text-shadow:0 0 12px #82f7ed8f;transform:translate(-2px,1px)}.glyph-secondary{font:18px/1 Georgia,serif;color:#cb9dff;position:absolute;right:3px;top:1px;text-shadow:0 0 9px #c593ff}.glyph-tile.tiny{width:24px;height:28px;border-radius:7px}.glyph-tile.tiny .glyph-primary{font-size:18px}.glyph-tile.tiny .glyph-secondary{font-size:12px;right:1px}.bench-bars{display:flex;flex-direction:column;gap:10px}.bench-row{display:grid;grid-template-columns:142px 1fr 42px;gap:8px;align-items:center;font-size:12px}.bench-row span{color:#b5cfd5}.bench-row b{font-variant-numeric:tabular-nums;text-align:right}.bench-track{height:12px;border-radius:6px;background:#051820;border:1px solid #81c5d029;overflow:hidden}.bench-track i{display:block;height:100%;background:linear-gradient(90deg,#50ffb0,#4be1ff 70%,#bd80fc);border-radius:6px;box-shadow:0 0 10px #56efd2a1}.sources-panel{border-radius:24px;padding:22px 25px;display:flex;align-items:center;gap:30px;justify-content:space-between}.sources-panel>div:first-child{max-width:290px;flex:0 0 auto}.sources-panel h2{font-size:19px;margin:3px 0}.sources-panel p{font-size:11px;color:#9bb9c1}.source-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1}.source-links a{display:grid;grid-template-columns:1fr auto;gap:2px;padding:12px;background:#102d3c9e;border:1px solid #9cdefb33;border-radius:13px;min-width:0}.source-links a:hover{border-color:#7effdf}.source-links strong{font-size:11px}.source-links small{font-size:10px;color:#9bb5bd;grid-column:1/-1}.source-links a span{grid-column:2;grid-row:1;color:#7cf9e3}body[data-page=explorer] .site-footer{padding-top:6px;padding-bottom:24px}
+@media(max-width:1250px){.explorer-topgrid{grid-template-columns:1fr}.project-table td{padding:12px}.sources-panel{display:block}.sources-panel>div:first-child{max-width:none;margin-bottom:14px}.gamma-layout{gap:16px}.hero-glass{min-height:430px}.hero-mark{height:150px}.symbol-word{height:148px}}
+@media(max-width:980px){.site-header{min-height:80px;flex-wrap:wrap;gap:9px}.primary-nav{order:3;width:100%;justify-content:center;padding-bottom:13px}.nav-action{margin-left:auto}.hero-glass{min-height:400px;padding:32px 4%}.home-main{padding-top:20px}.feature-row{gap:10px}.feature-card{gap:9px;padding:15px}.feature-icon{font-size:31px;width:35px}.feature-card strong{font-size:13px}.feature-card small{font-size:10px}.gamma-layout{grid-template-columns:1fr 1fr}.gamma-center{border-right:0}.gamma-right{grid-column:1/-1;max-width:500px;width:100%;margin:auto}.states-grid{max-width:300px}.source-links{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.site-shell{padding:0 15px}.site-header{min-height:64px}.brand{font-size:21px;gap:7px}.brand-crystal{width:33px;height:33px}.glass-button{font-size:11px;padding:8px 11px;min-height:34px}.primary-nav{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;gap:5px}.primary-nav a{white-space:nowrap;padding:7px 11px;font-size:11px}.home-main{gap:16px;justify-content:flex-start;padding-top:22px}.hero-glass{min-height:400px;border-radius:32px;padding:25px 12px 32px}.hero-topline{letter-spacing:2px;font-size:8px;gap:6px;margin-bottom:10px}.hero-mark{height:110px;gap:1px}.binary-word{transform:none;margin-right:0;height:112px;gap:2px;flex:0 0 auto}.binary-letter span{font-size:9.8px;letter-spacing:0}.symbol-word{height:112px;width:43%;flex:0 0 43%}.hero-subtitle{font-size:clamp(25px,7vw,36px)}.hero-lead{font-size:12px;margin:9px 0 20px}.hero-actions{gap:10px}.button{min-height:44px;min-width:0;width:100%;max-width:285px;font-size:12px}.feature-row{grid-template-columns:1fr;gap:9px}.feature-card{min-height:69px;padding:11px 17px;border-radius:17px}.feature-icon{font-size:29px;width:39px}.feature-card strong{font-size:13px}.feature-card small{font-size:10px}.site-footer{font-size:9px;letter-spacing:.2px;flex-wrap:wrap;padding-top:20px}.site-footer span:nth-child(2){display:none}.explorer-main{margin-top:12px;gap:12px}.explorer-heading{padding:22px 13px 16px;min-height:160px;border-radius:23px}.explorer-heading h1{font-size:28px}.explorer-heading p{font-size:11px}.eyebrow,.section-overline{font-size:9px;letter-spacing:1.6px}.mode-button{min-width:88px;padding:6px 15px;font-size:11px}.lab-panel,.gamma-panel{border-radius:20px;padding:17px}.panel-head h2{font-size:19px}.panel-head p{font-size:11px}.project-table{min-width:460px}.project-table td{font-size:11px;padding:10px 8px}.explorer-controls{grid-template-columns:1fr;gap:13px}.conversion-flow{gap:5px;grid-template-columns:minmax(0,1fr) 8px minmax(0,1fr) 8px minmax(0,1fr)}.conversion-node{min-height:112px;padding:9px 3px;border-radius:12px}.conversion-label{font-size:8px;margin-bottom:5px}.conversion-example{font-size:9px;margin-bottom:6px}.conversion-node strong{font-size:12px}.conversion-node small{font-size:8px}.flow-chevron{font-size:20px}.comparison-summary{grid-template-columns:1fr;padding:12px;gap:9px}.gamma-heading{align-items:flex-start}.gamma-heading h2{font-size:25px}.gamma-heading p{font-size:11px}.gamma-cta{font-size:8px;padding:7px}.gamma-layout{grid-template-columns:1fr;gap:20px}.gamma-explanation{min-height:0}.gamma-center{border-left:0;border-top:1px solid #9dffff24;border-bottom:1px solid #9dffff24;padding:18px 0}.single-cell{width:120px}.gamma-right{grid-column:auto}.states-grid{max-width:320px}.lower-grid{grid-template-columns:1fr}.source-links{grid-template-columns:1fr 1fr;gap:7px}.sources-panel{padding:18px}.source-links a{padding:9px}.source-links strong{font-size:10px}.source-links small{font-size:9px}.liquid-wave{opacity:.5}}
+@media(max-width:390px){.hero-mark{height:103px}.binary-word{transform:none;margin-right:0}.binary-letter span{font-size:8.8px}.symbol-word{width:45%;flex-basis:45%}.gamma-bits{gap:3px}.bit-button{min-height:38px}.source-links{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.symbol-fill,.bit-button{transition:none!important}}
+
+</style>
+  <style>
+/* Binball v1.1 — mobile-first scene navigation and shape × color research canvas. */
+.binary-word{width:54%;flex:0 1 54%;height:auto;max-height:170px;min-width:0;display:block}
+.binary-logo-svg{display:block;width:100%;height:100%;min-height:115px;overflow:visible;filter:drop-shadow(0 0 8px #25d9ac73)}
+.binary-digit{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.7px;font-weight:850;fill:#5bffd3;letter-spacing:0;text-shadow:0 0 8px #4cf5c1}
+.symbol-word{flex:0 1 44%;width:44%;min-width:0}
+.hero-mark{gap:clamp(7px,1.6vw,21px)}
+.binary-ascii-key{display:flex;gap:clamp(8px,1.3vw,22px);align-items:center;justify-content:center;flex-wrap:wrap;margin:2px auto 12px;color:#c4f0e7;font-size:11px;letter-spacing:.06em}
+.binary-ascii-key span{display:flex;align-items:center;gap:6px}.binary-ascii-key code{color:#65f5c8;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace}
+.feature-pager,.mobile-scenes{display:none}
+.glyph-lab-panel{border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:15px}
+.glyph-lab-panel h2{font-size:26px;letter-spacing:-.7px;margin:4px 0}.glyph-lab-panel h2 em{font-style:normal;color:#9ceeff}
+.glyph-canvas-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:18px}
+.glyph-stage{min-height:298px;border-radius:20px;border:1px solid #8af5ee32;background:radial-gradient(ellipse at 50% 45%,#25526855,#07181f 75%);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;gap:8px}
+.glyph-stage-main{height:158px;display:grid;place-items:center}
+.native-glyph{display:inline-grid;place-items:center;line-height:1;width:125px;height:142px;filter:drop-shadow(0 0 16px currentColor)}
+.native-glyph svg{display:block;width:100%;height:100%;overflow:visible}
+.native-glyph.small{width:34px;height:36px;filter:none}.native-glyph-mini .native-glyph{width:70px;height:88px;filter:drop-shadow(0 0 8px #72fbe5)}
+.glyph-stage-value{display:flex;align-items:center;gap:12px;color:#a9d6dc;font-size:12px}.glyph-stage-value strong{font-size:23px;color:white}.glyph-stage-value span{font:700 13px ui-monospace,monospace;color:#9cefdc}
+.shape-mapping{display:flex;align-items:center;gap:9px;font-size:12px;color:#b7cdd4}.shape-mapping strong{color:#69ffd2}
+.glyph-config{display:flex;flex-direction:column;gap:12px}.glyph-config .field-label{display:grid;grid-template-columns:1fr auto;gap:5px;color:#d6f5f3}.glyph-config .field-label select{grid-column:1/-1;max-width:100%;min-height:40px;padding:8px 10px}.glyph-config .field-label span{color:#91aeb9;font-weight:450}
+.palette-head{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#b7d0d6}.palette-head strong{color:#f5fbfc}
+.glyph-color-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px}
+.color-choice{aspect-ratio:1;border-radius:9px;background:var(--swatch);border:2px solid #ffffff42;min-height:27px;box-shadow:0 0 8px #0006;position:relative;transition:transform .2s}
+.color-choice.selected{border-color:#fff;outline:2px solid #74fbed;outline-offset:2px;transform:translateY(-2px)}
+.glyph-research-note{font-size:12px;color:#9abac2;line-height:1.55}
+.glyph-contrast-row{display:grid;grid-template-columns:150px 150px minmax(0,1fr);gap:12px;align-items:center;border:1px solid #85e1ee29;background:#071f2da3;border-radius:18px;padding:11px 15px}.glyph-contrast-row>div{height:106px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-right:1px solid #8bbad329}
+.glyph-contrast-row>div>span{font-size:10px;color:#a2c2cf}.glyph-contrast-row>div .native-glyph{width:58px;height:68px;filter:drop-shadow(0 0 8px #76dbff)}.glyph-contrast-row .glyph-tile{width:53px;height:63px}.glyph-contrast-row>p{font-size:12px;color:#b1c8cd}
+.channel-theory{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.channel-theory>div{padding:12px 14px;border-radius:15px;border:1px solid #8ddfdf24;background:#0c28347a;min-width:0}
+.channel-theory strong{display:block;font-size:13px;color:#d6fff5}.channel-theory span{display:block;font-size:11px;color:#9fbbc4;margin-top:4px}
+.gamma-double-preview{display:flex;align-items:center;justify-content:center;gap:16px;width:100%}.glyph-preview-unit{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}.glyph-preview-unit .state-caption{font-size:11px;white-space:normal;text-align:center}
+.gamma-double-preview .single-cell{max-width:90px;width:90px;min-height:110px;height:110px}.gamma-double-preview .single-cell .glyph-tile{transform:scale(1.25)}
+.gamma-states-toggle{display:none}
+@media(max-width:980px){.glyph-canvas-layout{grid-template-columns:1fr 1fr}.glyph-contrast-row{grid-template-columns:130px 130px 1fr}}
+@media(max-width:760px){
+ body[data-page=home]{height:100dvh;overflow:hidden}
+ body[data-page=home] .site-shell{height:100dvh;min-height:0}
+ .site-shell{padding:0 12px}
+ .site-header{min-height:54px;flex-wrap:nowrap;gap:8px;padding-top:4px}.brand{font-size:18px}.brand-crystal{width:28px;height:28px}
+ .primary-nav{order:initial;display:flex;width:auto;flex:1;justify-content:flex-end;padding:0;gap:1px;overflow:visible}
+ .primary-nav a{padding:7px 7px;font-size:11px}.primary-nav a:nth-child(n+3){display:none}
+ .nav-action{display:none}
+ .home-main{min-height:0;flex:1;padding:7px 0 8px;gap:9px;justify-content:center}
+ .hero-glass{padding:17px 9px 20px;min-height:0;border-radius:28px;flex:0 1 auto}
+ .hero-topline{font-size:7px;letter-spacing:1.15px;margin-bottom:7px}
+ .hero-mark{height:auto;min-height:103px;gap:5px;display:flex;align-items:center;width:100%}
+ .binary-word{width:54%;flex:0 1 54%;height:115px;max-height:none;transform:none;margin:0}
+ .binary-logo-svg{width:100%;height:100%;min-height:0}
+ .symbol-word{width:43%;flex:0 1 43%;height:112px;overflow:visible}
+ .binary-ascii-key{flex-wrap:nowrap;gap:7px;margin:0 0 10px;font-size:9px;white-space:nowrap}
+ .binary-ascii-key span{gap:3px}.binary-ascii-key code{font-size:9px}
+ .hero-subtitle{font-size:clamp(22px,6vw,30px)}
+ .hero-lead{margin:6px 0 12px;font-size:11px}
+ .hero-actions{flex-wrap:nowrap;gap:7px;width:100%}.button{width:50%;min-width:0;min-height:43px;padding:8px 6px;font-size:10px;gap:5px;white-space:normal}.button-glyph{font-size:17px}
+ .feature-pager{display:flex;align-items:center;justify-content:center;gap:15px;color:#b6e5e2;font-size:11px}
+ .feature-pager button{width:34px;height:28px;border-radius:9px;background:#163f4685;border:1px solid #a6f5e14c;color:#cffff4;font-size:23px;line-height:1}
+ .feature-row{display:block;min-height:73px}.feature-card{display:none;min-height:69px}.feature-card.mobile-feature-active{display:flex}
+ .site-footer{font-size:8px;padding:7px 0 11px;gap:8px}.site-footer>a{font-size:9px}
+ .explorer-main{margin:4px auto 15px;gap:9px}.explorer-heading{min-height:0;padding:10px 12px 8px;border-radius:19px}.explorer-heading h1{font-size:21px;margin:3px 0}.explorer-heading p{font-size:10px;line-height:1.35}.explorer-heading .eyebrow{font-size:8px;letter-spacing:1px}
+ .explorer-heading .mode-switch{display:none}
+ .mobile-scenes{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;border-radius:15px;padding:4px}
+ .mobile-scenes button{min-height:35px;font-size:10px;font-weight:650;color:#a7c5ce;border:0;background:transparent;border-radius:11px;padding:5px 1px}
+ .mobile-scenes button.active{background:linear-gradient(110deg,#1db18c6a,#3270b476,#6c3baf5a);color:white;box-shadow:inset 0 0 0 1px #a7f9e657}
+ .explorer-topgrid,.lower-grid{display:contents}
+ [data-mobile-screen]:not(body){display:none!important}
+ body[data-mobile-screen=archive] [data-mobile-screen=archive],body[data-mobile-screen=compare] [data-mobile-screen=compare],body[data-mobile-screen=gamma] [data-mobile-screen=gamma],body[data-mobile-screen=glyphs] [data-mobile-screen=glyphs],body[data-mobile-screen=research] [data-mobile-screen=research],body[data-mobile-screen=message] [data-mobile-screen=message]{display:block!important}
+ .lab-panel,.gamma-panel,.glyph-lab-panel{padding:13px;border-radius:18px}
+ .panel-head{margin-bottom:9px}.panel-head h2{font-size:17px;margin:3px 0}.panel-head p{font-size:10px}
+ .panel-icon{font-size:22px}.section-overline{font-size:8px;letter-spacing:1.3px}
+ .project-table-wrap{overflow:visible}.project-table{table-layout:fixed;min-width:0;width:100%;border-spacing:0 6px}
+ .project-table th{font-size:8px;text-align:right;letter-spacing:0;padding:0 1px 3px}.project-table th:first-child{text-align:left}
+ .project-table th:nth-child(1){width:32%}.project-table th:nth-child(2){width:18%}.project-table th:nth-child(3){width:23%}.project-table th:nth-child(4){width:27%}
+ .project-table tr td{height:42px;padding:7px 3px;font-size:10px;white-space:normal;line-height:1.12;vertical-align:middle}
+ .project-table td:nth-child(n+2){font-size:0;white-space:nowrap}
+ .project-table td:nth-child(n+2):after{content:attr(data-short);font-size:10px;font-weight:700;color:#d5f9fc}
+ .project-table .project-emoji{display:none}.project-table .project-name{gap:0}.project-table b{font-size:10px;font-weight:700;overflow-wrap:anywhere}
+ .panel-footnote{font-size:10px;line-height:1.45}
+ .explorer-controls{gap:8px}.field-label{font-size:11px}.file-upload{gap:5px;flex-wrap:wrap}
+ .conversion-flow{gap:4px}.conversion-node{min-height:93px;padding:7px 2px}.conversion-label{font-size:8px}.conversion-node strong{font-size:11px}.conversion-node small{font-size:7px}.conversion-example{font-size:7px;line-height:1.3}
+ .gamma-panel .gamma-heading{margin-bottom:7px}.gamma-heading h2{font-size:21px}.gamma-heading p{font-size:10px}.gamma-explanation{font-size:11px;line-height:1.4;margin:0 0 9px}
+ .gamma-layout{display:flex;flex-direction:column;gap:8px}.gamma-left{order:2}.gamma-center{order:1;display:flex;flex-direction:column;gap:5px;border:none;padding:2px 0 4px}.gamma-right{order:3;display:none!important}.states-open .gamma-right{display:block!important}
+ .gamma-double-preview{gap:10px}.gamma-double-preview .single-cell{max-width:73px;width:73px;height:75px;min-height:75px}.native-glyph-mini .native-glyph{width:59px;height:71px}
+ .glyph-preview-unit .state-caption{font-size:9px}.gamma-center .state-label{font-size:9px}.gamma-center .cell-foot{font-size:9px}
+ .gamma-states-toggle{display:block;margin:0 auto;padding:6px 12px}
+ .range-header{margin-top:3px}.gamma-bits{gap:3px}.bit-button{min-height:34px}.gamma-actions{gap:5px;margin-top:7px}.gamma-actions button{min-height:32px;font-size:10px;padding:6px 7px}.gamma-notation{font-size:10px;margin-top:6px}
+ .states-grid{max-width:280px}.grid-help{font-size:10px}
+ .glyph-lab-panel{gap:8px}.glyph-lab-panel h2{font-size:19px}.glyph-lab-panel .panel-head p{font-size:10px}
+ .glyph-canvas-layout{grid-template-columns:1fr 1fr;gap:9px}
+ .glyph-stage{min-height:0;border-radius:14px;padding:9px 4px;gap:6px}.glyph-stage-main{height:102px}.glyph-stage-main .native-glyph{width:93px;height:104px}
+ .glyph-stage-value{gap:5px;flex-wrap:wrap;justify-content:center;font-size:9px}.glyph-stage-value strong{font-size:18px}.glyph-stage-value span{font-size:9px}
+ .shape-mapping{font-size:9px;gap:4px;flex-wrap:wrap;justify-content:center}
+ .glyph-config{gap:8px}.glyph-config .field-label{grid-template-columns:1fr;gap:3px;font-size:10px}.glyph-config .field-label span{display:none}
+ .glyph-config .field-label select{padding:6px;min-height:32px;font-size:10px}.palette-head{font-size:10px}
+ .glyph-color-grid{grid-template-columns:repeat(8,1fr);gap:4px}.color-choice{min-height:18px;border-radius:5px}
+ .glyph-research-note{font-size:9px;line-height:1.4}
+ .glyph-contrast-row{grid-template-columns:1fr 1fr;gap:6px;padding:7px}.glyph-contrast-row>div{height:70px}.glyph-contrast-row>div>span{font-size:8px}.glyph-contrast-row>p{grid-column:1/-1;font-size:9px}.glyph-contrast-row .glyph-tile{width:38px;height:42px}.glyph-contrast-row>div .native-glyph{width:45px;height:48px}
+ .channel-theory{grid-template-columns:repeat(3,1fr);gap:5px}.channel-theory>div{padding:7px 6px}.channel-theory strong{font-size:9px}.channel-theory span{font-size:8px;overflow-wrap:anywhere}
+ .bench-row{grid-template-columns:105px 1fr 36px;gap:5px;font-size:10px}.bench-row span{overflow-wrap:anywhere}
+ .source-links{grid-template-columns:1fr 1fr;gap:6px}
+ .site-footer{display:none}
+}
+@media(max-width:365px){.binary-ascii-key code{font-size:8px}.primary-nav a{font-size:10px}.hero-mark{min-height:95px}.binary-word{height:105px}.symbol-word{height:104px}.mobile-scenes button{font-size:9px}.project-table td:nth-child(n+2):after{font-size:9px}}
+@media(max-height:650px) and (max-width:760px){.feature-row,.feature-pager{display:none}.hero-topline{display:none}.hero-glass{padding:11px}.hero-mark{height:80px;min-height:0}.binary-word,.symbol-word{height:88px}}
+@media(prefers-reduced-motion:reduce){.color-choice{transition:none}}
+
+@media(min-width:761px){.hero-mark{height:210px}.binary-word{height:185px;max-height:185px}.binary-logo-svg{width:100%;height:185px;min-height:0}.symbol-word{height:185px}.hero-glass{min-height:520px}}
+@media(max-width:760px){.native-glyph-mini .native-glyph{filter:drop-shadow(0 0 9px #ab8aff)}}
+
+</style>
+  <script defer>
+/* BinBol site: a static, dependency-free visual research frontend.
+   Counts are theoretical displayed token counts, never storage claims. */
+(() => {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const number = (value) => Number(value).toLocaleString('en-US');
+  const compact = (v) => v>=1e9?(v/1e9).toFixed(2)+'B':v>=1e6?(v/1e6).toFixed(2)+'M':v>=1e3?(v/1e3).toFixed(v<1e4?1:0)+'K':String(v);
+  const glyphHigh = ['✧','◈','⌬','◇','⟐','⊕','⋈','⌘','⌁','⟡','◉','⊗','△','❖','☽','⧉'];
+  const glyphLow  = ['·','˙','°','⁺','×','⌃','~','∗','⌄','˚','–','○','⁕','˟','ː','†'];
+  const projects = [
+    {id:'tetris', name:'Tetris (Game Boy)', emoji:'▦', size:'32 KiB', bytes:32768, description:'1989 Game Boy cartridge-size example'},
+    {id:'mario', name:'Super Mario Land', emoji:'★', size:'64 KiB', bytes:65536, description:'1989 Game Boy cartridge-size example'},
+    {id:'pokemon', name:'Pokémon Red', emoji:'◉', size:'1 MiB', bytes:1048576, description:'Game Boy cartridge-size example'},
+    {id:'apollo', name:'Apollo AGC · fixed rope', emoji:'☾', size:'72 KiB', bytes:36864*2, description:'36,864 words × 16 bits, including parity'},
+    {id:'linux', name:'Linux 7.3 · .tar.xz', short:'Linux 7.3', emoji:'⌘', size:'154.88 MiB', bytes:162399360, description:'Measured .tar.xz compressed archive (162,399,360 bytes), NOT the uncompressed source. Linux 7.3 has approximately 30.96 million detected code lines; no Linux BinBol-dictionary benchmark has been run.'}
+  ];
+  function createTile(value, small = false) {
+    const el = document.createElement('span');
+    el.className = 'glyph-tile' + (small ? ' tiny' : '');
+    el.title = `Byte ${value} (0x${value.toString(16).padStart(2, '0').toUpperCase()})`;
+    const primary = document.createElement('span');
+    primary.className = 'glyph-primary';
+    primary.textContent = glyphHigh[value >> 4];
+    const secondary = document.createElement('span');
+    secondary.className = 'glyph-secondary';
+    secondary.textContent = glyphLow[value & 15];
+    el.append(primary, secondary);
+    return el;
+  }
+  // Each filled position of B, i, n cycles that letter's actual ASCII bits.
+  // Repeated bits are a typographic pattern; each letter's exact 8-bit code is shown separately.
+  function initBinaryLogo() {
+    const target = $('binary-word'); if (!target) return;
+    const letters = [
+      {code:'01000010', x:0, rows:['11111110','11000111','11000011','11000111','11111110','11000111','11000011','11000111','11111110']},
+      {code:'01101001', x:94, rows:['00100','00100','00000','01100','01100','01100','01100','01100','01100']},
+      {code:'01101110', x:160, rows:['00000000','00000000','11011110','11100111','11000011','11000011','11000011','11000011','11000011']}
+    ];
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 264 112');
+    svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('class','binary-logo-svg');
+    svg.setAttribute('role','img');svg.setAttribute('aria-label','Bin built from real ASCII bits: B 01000010, i 01101001, n 01101110');
+    letters.forEach(letter=>{
+      let index=0;
+      letter.rows.forEach((line,y)=>Array.from(line).forEach((mask,x)=>{
+        if(mask!=='1')return;
+        const t=document.createElementNS(ns,'text');
+        t.setAttribute('x',String(letter.x+x*11.8));t.setAttribute('y',String(16+y*11.7));
+        t.setAttribute('class','binary-digit');t.textContent=letter.code[index++%8];svg.append(t);
+      }));
+    });
+    target.replaceChildren(svg);
+  }
+  const markPaths=[
+    'M50 8 L83 27 L83 69 L50 90 L17 69 L17 27 Z M50 8 V90 M17 27 L83 69',
+    'M50 7 L88 50 L50 93 L12 50 Z M50 27 L70 50 L50 73 L30 50 Z',
+    'M16 20 C61 6 94 37 84 63 C77 88 40 101 18 70 C47 82 72 60 61 38 C51 20 37 18 16 20 Z',
+    'M50 6 L60 38 L93 50 L60 61 L50 94 L39 61 L7 50 L39 38 Z',
+    'M15 25 L50 9 L85 25 L65 49 L85 74 L50 92 L15 74 L35 49 Z M50 9 V92',
+    'M18 19 L82 19 L18 81 L82 81 M50 10 L50 90',
+    'M15 55 Q30 8 49 55 T85 55 M15 78 Q30 31 49 78 T85 78',
+    'M20 12 V88 M80 12 V88 M20 27 L80 73 M80 27 L20 73',
+    'M50 8 L88 37 L63 54 L84 83 L50 94 L16 83 L37 54 L12 37 Z',
+    'M15 80 L15 37 Q50 -5 85 37 L85 80 M30 80 L30 44 Q50 22 70 44 L70 80',
+    'M50 50 C80 15 104 50 79 74 C59 100 11 78 20 43 C29 8 73 14 69 46 C64 74 38 73 39 53',
+    'M14 50 L38 16 L62 50 L86 16 M14 84 L38 50 L62 84 L86 50',
+    'M50 9 L86 83 L14 83 Z M50 31 L69 70 L31 70 Z',
+    'M14 26 L86 26 L86 45 L14 45 Z M14 63 L86 63 L86 82 L14 82 Z',
+    'M50 7 C70 21 70 41 50 50 C30 59 30 79 50 93 M50 7 C30 21 30 41 50 50 C70 59 70 79 50 93',
+    'M50 8 L85 28 L74 69 L50 91 L26 69 L15 28 Z M15 28 L85 28 M26 69 L74 69'
+  ];
+  const spectrum=['#ff695e','#ffa157','#ffd05a','#f2ec6c','#b8ee6c','#67e7a1','#4ce8ce','#48dbef','#6bc5ff','#849aff','#a58aff','#cf83f5','#f27dcf','#f184aa','#ad6aff','#ffffff'];
+  const luminance=Array.from({length:16},(_,i)=>{const v=Math.round(52+i*12);return '#'+[v,v,v].map(x=>x.toString(16).padStart(2,'0')).join('');});
+  function getVisualColor(index){return (($('glyph-palette-type')?.value)==='luminance'?luminance:spectrum)[index];}
+  function createNativeGlyph(value,small=false) {
+    const wrapper=document.createElement('span');wrapper.className='native-glyph'+(small?' small':'');
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');
+    svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',markPaths[value>>4]);path.setAttribute('fill','none');
+    path.setAttribute('stroke',getVisualColor(value&15));path.setAttribute('stroke-width','4.8');
+    path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');
+    svg.append(path);wrapper.append(svg);
+    wrapper.title=`Value ${value}: shape ${value>>4}, color ${value&15}`;
+    wrapper.setAttribute('role','img');wrapper.setAttribute('aria-label',wrapper.title);
+    return wrapper;
+  }
+  function initFeaturePager(){
+    const cards=Array.from(document.querySelectorAll('.feature-card'));if(!cards.length)return;
+    let active=0;
+    const display=()=>{cards.forEach((card,index)=>card.classList.toggle('mobile-feature-active',index===active));
+      const t=$('feature-current');if(t)t.textContent=`${active+1} / ${cards.length}`;};
+    $('feature-prev')?.addEventListener('click',()=>{active=(active+cards.length-1)%cards.length;display();});
+    $('feature-next')?.addEventListener('click',()=>{active=(active+1)%cards.length;display();});display();
+  }
+  function initRain() {
+    const canvas = $('symbol-rain');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const symbols = '01◇✧⋈⌁◈⊕01⌬⋄⟡10';
+    let columns = [], width = 0, height = 0, cell = 35, lastFrame = 0, request = 0;
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = window.innerWidth; height = window.innerHeight;
+      canvas.width = Math.ceil(width * dpr);canvas.height = Math.ceil(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cell = width < 650 ? 27 : 37;
+      columns = Array.from({length: Math.ceil(width / cell)}, (_, i) => ({
+        x: i * cell + Math.random()*10, y: Math.random()*height,
+        speed: 11 + Math.random()*30, tail: 4 + Math.floor(Math.random()*6),
+        tint: Math.random() < .14 ? 275 : (Math.random() < .2 ? 180 : 153)
+      }));
+    }
+    function draw(now) {
+      request = window.requestAnimationFrame(draw);
+      if (document.hidden || now-lastFrame<33) return;
+      const dt = Math.min((now-lastFrame || 33)/1000,.065);lastFrame=now;
+      ctx.fillStyle='rgba(2,11,16,.17)';ctx.fillRect(0,0,width,height);
+      ctx.font = `${width < 650 ? 15 : 17}px ui-monospace, monospace`;
+      for(const c of columns) {
+        c.y += c.speed*dt;
+        if(c.y > height+100)c.y=-c.tail*23;
+        for(let j=0;j<c.tail;j++){
+          const y=c.y-j*23;
+          if(y<0||y>height)continue;
+          const alpha=(1-j/c.tail)*(.2+(.25*Math.sin(now/1800+c.x))**2);
+          ctx.fillStyle=`hsla(${c.tint},100%,${j===0?70:55}%,${alpha.toFixed(3)})`;
+          const pos=(Math.floor(now/230)+j*5+Math.floor(c.x))%symbols.length;
+          ctx.fillText(symbols[pos],c.x,y);
+        }
+      }
+    }
+    function onPreferenceChange() {
+      if (request) window.cancelAnimationFrame(request);
+      ctx.clearRect(0,0,width,height);
+      if (!reduceMotion.matches) {lastFrame=0;request=window.requestAnimationFrame(draw);}
+      else {
+        ctx.fillStyle='rgba(72,215,194,.18)';ctx.font='14px monospace';
+        columns.forEach((c,i)=>ctx.fillText(symbols[i%symbols.length],c.x,(i*97)%height));
+      }
+    }
+    resize();onPreferenceChange();
+    window.addEventListener('resize',()=>{resize();onPreferenceChange();},{passive:true});
+    if(reduceMotion.addEventListener)reduceMotion.addEventListener('change',onPreferenceChange);
+  }
+  function initExplorer() {
+    const rows = $('project-rows');if(!rows)return;
+    const select = $('project-select'); const slider = $('width-slider');
+    const message = $('message-input');let customBytes=0;let customLabel='Custom message';
+    function selected(){return select.value==='custom'?{id:'custom',name:customLabel,size:`${customBytes} B`,bytes:customBytes,description:`Local sample: ${customLabel}`}:projects.find(p=>p.id===select.value)||projects[2];}
+    function getWidth(){return Number(slider.value);}
+    function setLabel(element,text){if(element)element.textContent=text;}
+    function redrawTable() {
+      rows.replaceChildren();
+      for(const project of projects){
+        const tr = document.createElement('tr');tr.tabIndex=0;tr.setAttribute('aria-label',`Select ${project.name}`);
+        if(project.id===select.value)tr.className='selected';
+        const name=document.createElement('td');name.innerHTML=`<span class="project-name"><span class="project-emoji" aria-hidden="true">${project.emoji}</span><b></b></span>`;
+        name.querySelector('b').textContent=project.short||project.name;name.title=project.name;
+        const size=document.createElement('td');size.textContent=project.size;size.dataset.short=project.id==='linux'?'154.9MiB':project.size.replace(' ','');
+        const binary=document.createElement('td');binary.textContent=project.bytes===null?'—':number(project.bytes*8);binary.dataset.short=project.bytes===null?'—':compact(project.bytes*8);binary.title=binary.textContent;
+        const symbols=document.createElement('td');symbols.textContent=project.bytes===null?'—':number(Math.ceil(project.bytes*8/getWidth()));symbols.dataset.short=project.bytes===null?'—':compact(Math.ceil(project.bytes*8/getWidth()));symbols.title=symbols.textContent;
+        if(project.bytes===null){binary.className='not-available';symbols.className='not-available';}
+        tr.append(name,size,binary,symbols);
+        const activate=()=>{select.value=project.id;update();};
+        tr.addEventListener('click',activate);
+        tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+        rows.append(tr);
+      }
+    }
+    function redrawSymbols(){
+      const target=$('symbol-preview');target.replaceChildren();
+      const seed=[0x42,0x69,0x6e,0x62,0x6f,0x6c];
+      seed.slice(0,5).forEach(v=>target.append(createTile(v,true)));
+    }
+    function update() {
+      const width=getWidth();const project=selected();const count=project.bytes===null?null:project.bytes*8;
+      redrawTable();redrawSymbols();
+      setLabel($('width-indicator'),`${width} bits · ${number(2**width)} states`);
+      setLabel($('binary-count'),count===null?'Not measured':number(count));
+      setLabel($('byte-count'),project.bytes===null?'Not measured':number(project.bytes));
+      setLabel($('symbol-count'),count===null?'Not measured':number(Math.ceil(count/width)));
+      setLabel($('visual-ratio'),count===null?'Needs measured source bytes':`${width}× fewer than binary digits`);
+      $('symbol-meter').style.width=`${100/width}%`;
+      setLabel($('explorer-note'),project.bytes===null?
+        'Only source-line counts are available. To calculate source tokens, measure the raw source bytes first.':
+        `${project.description}. The symbol count is an idealized ${width}-bit token model; preview glyphs illustrate the 8-bit alphabet only. It does not measure storage or actual compressed size.`);
+    }
+    select.addEventListener('change',update);slider.addEventListener('input',update);
+    document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{
+      const mode=button.dataset.mode;document.body.classList.remove('mode-binary','mode-symbols','mode-compare');document.body.classList.add(`mode-${mode}`);
+      document.querySelectorAll('[data-mode]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+    }));
+    function redrawMessage() {
+      const bytes=new TextEncoder().encode(message.value);customBytes=bytes.length;
+      setLabel($('message-bytes'),number(bytes.length));setLabel($('message-digits'),number(bytes.length*8));setLabel($('message-tokens'),number(bytes.length));
+      const target=$('message-glyphs');target.replaceChildren();
+      bytes.slice(0,64).forEach(b=>target.append(createTile(b,false)));
+      if(bytes.length>64){const extra=document.createElement('span');extra.className='panel-footnote';extra.textContent=`+${number(bytes.length-64)} more tiles`;target.append(extra);}
+      if(select.value==='custom')update();
+    }
+    message.addEventListener('input',()=>{customLabel='Custom message';redrawMessage();});
+    const fileInput=$('file-input');
+    if(fileInput){fileInput.addEventListener('change',()=>{
+      const file=fileInput.files?.[0];if(!file)return;
+      customBytes=file.size;customLabel=file.name;
+      select.value='custom';
+      $('file-feedback').textContent=`${file.name} · ${number(file.size)} bytes · local size only`;
+      update();
+    });}
+    initGamma();initGlyphLab();initMobileScenes();redrawMessage();update();
+  }
+  function initGamma() {
+    const slider=$('gamma-slider');if(!slider)return;
+    const grid=$('states-grid');const bitsContainer=$('gamma-bits');
+    let value=78;let animation=null;
+    const buttons=[];
+    for(let bit=7;bit>=0;bit--){
+      const button=document.createElement('button');button.type='button';button.className='bit-button';
+      button.title=`Toggle bit ${bit} (value ${2**bit})`;
+      button.setAttribute('aria-label',`Toggle bit ${bit}`);
+      button.addEventListener('click',()=>setValue(value^(1<<bit)));bitsContainer.append(button);buttons.push(button);
+    }
+    for(let n=0;n<256;n++){
+      const button=document.createElement('button');button.type='button';button.className='state-square';
+      button.style.setProperty('--hue',String(158+(n/255)*116));button.title=`${n} · 0b${n.toString(2).padStart(8,'0')}`;
+      button.setAttribute('role','gridcell');button.setAttribute('aria-label',`Select ${n}`);
+      button.addEventListener('click',()=>setValue(n));grid.append(button);
+    }
+    const squares=Array.from(grid.children);
+    function setValue(next){
+      value=Math.max(0,Math.min(255,Number(next)|0));slider.value=String(value);
+      const bin=value.toString(2).padStart(8,'0');
+      setText('gamma-value',value);setText('gamma-binary',bin);setText('gamma-hex','0x'+value.toString(16).padStart(2,'0').toUpperCase());setText('gamma-decimal',value);
+      setText('state-label',`STATE ${String(value).padStart(3,'0')} / 255`);
+      buttons.forEach((button,index)=>{const active=bin[index]==='1';button.textContent=bin[index];button.classList.toggle('on',active);button.setAttribute('aria-pressed',String(active));});
+      squares.forEach((square,index)=>{square.classList.toggle('selected',index===value);square.setAttribute('aria-selected',String(index===value));});
+      const tile=$('gamma-tile');tile.replaceChildren(createTile(value));tile.setAttribute('aria-label',`Visual tile for ${value}: ${bin}`);
+      $('gamma-native-glyph')?.replaceChildren(createNativeGlyph(value));
+      document.dispatchEvent(new CustomEvent('binball:bytechange',{detail:value}));
+    }
+    function setText(id,v){const el=$(id);if(el)el.textContent=v;}
+    function stopAnimation(){if(animation!==null){clearInterval(animation);animation=null;}setText('gamma-play','▶ Animate');}
+    $('gamma-zero').addEventListener('click',()=>{stopAnimation();setValue(0);});
+    $('gamma-max').addEventListener('click',()=>{stopAnimation();setValue(255);});
+    $('gamma-random').addEventListener('click',()=>{stopAnimation();setValue(Math.floor(Math.random()*256));});
+    slider.addEventListener('input',e=>{stopAnimation();setValue(e.target.value);});
+    $('gamma-play').addEventListener('click',()=>{
+      if(animation!==null){stopAnimation();return;}
+      setText('gamma-play','Ⅱ Pause');
+      animation=setInterval(()=>setValue((value+1)&255),95);
+    });
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAnimation();});
+    const statesToggle=$('states-toggle');
+    statesToggle?.addEventListener('click',()=>{const open=document.body.classList.toggle('states-open');statesToggle.setAttribute('aria-expanded',String(open));statesToggle.textContent=open?'Hide 256-state map ▴':'256-state map ▾';});
+    setValue(value);
+  }
+  function initGlyphLab(){
+    const shapes=$('shape-select');if(!shapes)return;
+    let value=78;
+    for(let i=0;i<16;i++){const o=document.createElement('option');o.value=String(i);o.textContent=`${i.toString(16).toUpperCase()} · ${['Hex','Diamond','Crescent','Spark','Crest','Zigzag','Wave','Cross','Rune','Arch','Spiral','Twin','Triangle','Parallel','Orbits','Shield'][i]}`;shapes.append(o);}
+    const colors=$('glyph-colors');
+    for(let i=0;i<16;i++){
+      const b=document.createElement('button');b.type='button';b.className='color-choice';b.title=`Color index ${i}`;
+      b.setAttribute('aria-label',`Select color index ${i}`);b.style.setProperty('--swatch',spectrum[i]);
+      b.addEventListener('click',()=>setLabValue((value&240)+i,true));colors.append(b);
+    }
+    function setText(id,v){const el=$(id);if(el)el.textContent=v;}
+    function setLabValue(next,sync){
+      value=Number(next)&255;const hi=value>>4,lo=value&15;
+      shapes.value=String(hi);setText('color-index',`${lo} / 15`);
+      setText('shape-label',`Shape ${hi}`);setText('color-label',`Color ${lo}`);
+      setText('glyph-decimal',String(value));setText('glyph-state',String(value));
+      setText('glyph-binary',value.toString(2).padStart(8,'0').replace(/(.{4})/,'$1 '));
+      const palette=$('glyph-palette-type').value;
+      [...colors.children].forEach((b,i)=>{b.classList.toggle('selected',i===lo);b.setAttribute('aria-pressed',String(i===lo));b.style.setProperty('--swatch',(palette==='luminance'?luminance:spectrum)[i]);});
+      $('glyph-stage-main').replaceChildren(createNativeGlyph(value));
+      $('pure-swatch').replaceChildren(createNativeGlyph(value));
+      $('classic-swatch').replaceChildren(createTile(value));
+      if(sync){const gamma=$('gamma-slider');gamma.value=String(value);gamma.dispatchEvent(new Event('input',{bubbles:true}));}
+    }
+    shapes.addEventListener('change',()=>setLabValue((Number(shapes.value)<<4)+(value&15),true));
+    $('glyph-palette-type').addEventListener('change',()=>setLabValue(value,true));
+    document.addEventListener('binball:bytechange',(e)=>setLabValue(e.detail,false));
+    setLabValue(value,false);
+  }
+  function initMobileScenes(){
+    const tabs=Array.from(document.querySelectorAll('[data-mobile-target]'));if(!tabs.length)return;
+    const pages=['archive','compare','gamma','glyphs','message','research'];
+    function show(name){const next=pages.includes(name)?name:'archive';document.body.dataset.mobileScreen=next;
+      tabs.forEach(t=>{const active=t.dataset.mobileTarget===next;t.classList.toggle('active',active);t.setAttribute('aria-pressed',String(active));});
+      if(window.matchMedia('(max-width: 760px)').matches)window.scrollTo({top:0,behavior:'instant'});
+    }
+    tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.mobileTarget)));
+    const fromHash=()=>{if(location.hash==='#gamma')show('gamma');else if(location.hash==='#glyph-lab')show('glyphs');else if(location.hash==='#sources')show('research');};
+    window.addEventListener('hashchange',fromHash);show('archive');fromHash();
+  }
+  if($('copyright-year'))$('copyright-year').textContent=new Date().getFullYear();
+  initBinaryLogo();initFeaturePager();initRain();initExplorer();
+})();
+
+</script>
+</head>
+<body data-page="explorer">
+  <canvas id="symbol-rain" aria-hidden="true"></canvas>
+  <div class="aurora aurora-a" aria-hidden="true"></div><div class="aurora aurora-b" aria-hidden="true"></div>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="BinBol-Landing-Live-Preview.html" aria-label="BinBol home"><span class="brand-crystal" aria-hidden="true"><svg viewBox="0 0 48 48"><defs><linearGradient id="gem2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34ffbb"/><stop offset=".52" stop-color="#39ddfd"/><stop offset="1" stop-color="#bb8aff"/></linearGradient></defs><path d="M24 3 42 13v22L24 45 6 35V13z" fill="none" stroke="url(#gem2)" stroke-width="2.4"/><path d="m24 3 0 42M6 13l18 11 18-11M6 35l18-11 18 11" stroke="url(#gem2)" stroke-width="1.4" fill="none"/></svg></span><span>BinBol</span></a>
+      <nav class="primary-nav" aria-label="Main navigation"><a href="BinBol-Landing-Live-Preview.html">Home</a><a class="active" aria-current="page" href="explorer.html">Explorer</a><a href="#gamma">Gamma Live</a><a href="https://github.com/DorManDel/Binbol/blob/feat/binball-liquid-glass-explorer/studio.html">Research Studio</a></nav>
+      <a class="nav-action glass-button" href="#gamma">Try the Lab <span aria-hidden="true">↘</span></a>
+    </header>
+    <main class="explorer-main">
+      <section class="explorer-heading liquid-panel"><div class="eyebrow">◈ &nbsp; EXPLORE THE SCALE OF INFORMATION</div><h1>BinBol <em>Symbol Explorer</em></h1><p>From legendary cartridges to moon missions — see how the same bits can take different visual forms.</p><div class="mode-switch" aria-label="Comparison display mode"><button class="mode-button" type="button" data-mode="binary">Binary</button><button class="mode-button" type="button" data-mode="symbols">Symbols</button><button class="mode-button active" type="button" data-mode="compare" aria-pressed="true">Compare</button></div></section>
+      <nav class="mobile-scenes liquid-panel" aria-label="Mobile Explorer sections"><button type="button" data-mobile-target="archive" class="active" aria-pressed="true">Archive</button><button type="button" data-mobile-target="compare" aria-pressed="false">Compare</button><button type="button" data-mobile-target="gamma" aria-pressed="false">Gamma</button><button type="button" data-mobile-target="glyphs" aria-pressed="false">Glyphs</button><button type="button" data-mobile-target="message" aria-pressed="false">Message</button><button type="button" data-mobile-target="research" aria-pressed="false">Research</button></nav>
+      <section class="explorer-topgrid">
+        <article class="lab-panel liquid-panel project-panel" data-mobile-screen="archive"><div class="panel-head"><div><span class="section-overline">01 / THE ARCHIVE</span><h2>Known Projects</h2><p>Real sizes, with theoretical representation counts.</p></div><span class="panel-icon" aria-hidden="true">▱</span></div><div class="project-table-wrap"><table class="project-table"><thead><tr><th>Project</th><th>Size</th><th>Bits</th><th>Symbols*</th></tr></thead><tbody id="project-rows"></tbody></table></div><p class="panel-footnote">* Symbol count = ⌈bits ÷ selected width⌉. These are abstract tokens, not verified file-size savings. <a href="#sources">Sources ↘</a></p></article>
+        <article class="lab-panel liquid-panel live-panel" data-mobile-screen="compare"><div class="panel-head"><div><span class="section-overline">02 / LIVE EXPLORER</span><h2>Watch the bits transform</h2><p>Same payload. Different representation.</p></div><span class="panel-icon cyan" aria-hidden="true">✧</span></div>
+          <div class="explorer-controls"><label class="field-label" for="project-select">Project <select id="project-select"><option value="tetris">Tetris — Game Boy</option><option value="mario">Super Mario Land</option><option value="pokemon" selected>Pokémon Red</option><option value="apollo">Apollo AGC — fixed rope</option><option value="linux">Linux 7.3 — code lines only</option><option value="custom">Custom / local sample</option></select></label><label class="field-label width-field" for="width-slider">Bits per visual token <span id="width-indicator">8 bits · 256 states</span><input id="width-slider" type="range" min="4" max="16" step="4" value="8"></label></div>
+          <div class="file-upload"><label class="file-upload-button" for="file-input">↑ Analyze a local file</label><input id="file-input" type="file" aria-label="Choose a local file to compare"><span id="file-feedback">Only file size is read · nothing is uploaded</span></div>
+          <div class="conversion-flow" id="conversion-flow"><div class="conversion-node binary-node"><span class="conversion-label">01 · Binary</span><code class="conversion-example">01000010 01101001 01101110</code><strong id="binary-count">8,388,608</strong><small>visible digits</small></div><span class="flow-chevron" aria-hidden="true">›</span><div class="conversion-node byte-node"><span class="conversion-label">02 · Bytes</span><code class="conversion-example">42 69 6e 62 6f 6c</code><strong id="byte-count">1,048,576</strong><small>8-bit bytes</small></div><span class="flow-chevron" aria-hidden="true">›</span><div class="conversion-node symbol-node"><span class="conversion-label">03 · BinBol</span><div class="symbol-preview" id="symbol-preview" aria-label="Example symbolic tokens"></div><strong id="symbol-count">1,048,576</strong><small>visual tokens</small></div></div>
+          <div class="comparison-summary"><div><span>Displayed token ratio</span><strong id="visual-ratio">8× fewer than binary digits</strong></div><div class="comparison-bars"><div class="meter-track"><div class="meter-fill binary-fill"></div></div><div class="meter-track"><div class="meter-fill symbol-fill" id="symbol-meter"></div></div></div></div>
+          <p class="panel-footnote" id="explorer-note">This comparison counts displayed units, not compressed file size. Actual storage depends on encoding, framing, and dictionaries.</p>
+        </article>
+      </section>
+      <section class="gamma-panel liquid-panel" data-mobile-screen="gamma" id="gamma" aria-labelledby="gamma-title"><div class="gamma-heading"><div><span class="section-overline">03 / INTERACTIVE BITFIELD LAB</span><h2 id="gamma-title">Gamma <em>Live.</em></h2><p>Eight switches. One byte. An entire universe of <strong>256 states.</strong></p></div><div class="gamma-cta"><span class="status-pulse"></span> LIVE INTERACTION</div></div><div class="gamma-layout">
+          <div class="gamma-left"><p class="gamma-explanation">Eight individual bits can represent <strong>2<sup>8</sup> = 256</strong> combinations. A single visual tile can stand for any selected byte value. It does <em>not</em> mean 256 bytes fit inside one byte.</p><label class="range-header" for="gamma-slider">Selected value <output id="gamma-value">78</output><span>/ 255</span></label><input id="gamma-slider" type="range" min="0" max="255" value="78" step="1"><div id="gamma-bits" class="gamma-bits" role="group" aria-label="Eight clickable bit toggles"></div><div class="gamma-actions"><button id="gamma-zero" type="button" class="small-button">Zero</button><button id="gamma-max" type="button" class="small-button">Max</button><button id="gamma-random" type="button" class="small-button">Randomize ↝</button><button id="gamma-play" type="button" class="small-button accented">▶ Animate</button></div><div class="gamma-notation"><span>Binary <code id="gamma-binary">01001110</code></span><span>Hex <code id="gamma-hex">0x4E</code></span><span>Decimal <code id="gamma-decimal">78</code></span></div></div>
+          <div class="gamma-center"><div class="gamma-double-preview"><div class="glyph-preview-unit"><div class="state-caption">Classic tile · retained</div><div class="single-cell" id="gamma-tile" aria-label="BinBol abstract tile for value 78"></div></div><div class="glyph-preview-unit"><div class="state-caption">Shape + color · experimental</div><div class="native-glyph-mini" id="gamma-native-glyph"></div></div></div><div class="state-label" id="state-label">STATE 078 / 255</div><div class="cell-foot">One selected byte · Two rendering approaches</div><button type="button" id="states-toggle" class="small-button gamma-states-toggle" aria-expanded="false">256-state map ▾</button></div>
+          <div class="gamma-right" id="gamma-states-panel"><div class="states-heading"><strong>256 possible states</strong><span>16 × 16 combinations</span></div><div id="states-grid" class="states-grid" role="grid" aria-label="256 selectable values from zero to 255"></div><p class="grid-help">Tap any cell to inspect its binary value and composed symbol.</p></div></div>
+      </section>
+
+      <section class="glyph-lab-panel liquid-panel" id="glyph-lab" data-mobile-screen="glyphs" aria-labelledby="glyph-lab-title">
+        <div class="panel-head"><div><span class="section-overline">04 / SHAPE × COLOR × VALUE · DESIGN EXPERIMENT</span><h2 id="glyph-lab-title">Glyph Canvas <em>V1.</em></h2><p>One standalone mark. Two channels. No app icon, no container necessary.</p></div><span class="panel-icon violet" aria-hidden="true">✧</span></div>
+        <div class="glyph-canvas-layout">
+          <div class="glyph-stage"><div class="glyph-stage-main" id="glyph-stage-main" role="img" aria-label="Native glyph made from selected shape and color"></div><div class="glyph-stage-value">Byte <strong id="glyph-decimal">78</strong><span id="glyph-binary">0100 1110</span></div><div class="shape-mapping"><span id="shape-label">Shape 4</span><span>×</span><span id="color-label">Color 14</span><span>=</span><strong id="glyph-state">78</strong></div></div>
+          <div class="glyph-config"><label class="field-label" for="shape-select">Shape — upper 4 bits <span>16 possible shapes</span><select id="shape-select"></select></label><label class="field-label" for="glyph-palette-type">Color palette — lower 4 bits <span>16 indexed colors</span><select id="glyph-palette-type"><option value="spectrum">Spectral palette</option><option value="luminance">Luminance study</option></select></label><div class="palette-head">Choose color index <strong id="color-index">14 / 15</strong></div><div id="glyph-colors" class="glyph-color-grid" aria-label="16 color indices"></div><p class="glyph-research-note">This is a *visual encoding proposal*, not a confirmed color-readable or compression format. We need to test distinguishability, contrast, reproducibility and accessibility.</p></div>
+        </div>
+        <div class="glyph-contrast-row"><div><span>Classic tile / current demo</span><div id="classic-swatch"></div></div><div><span>Pure glyph / new concept</span><div id="pure-swatch"></div></div><p>The original two-mark tile remains intact for comparison. The proposed native glyph carries a shape index and a palette index, both visible without a surrounding tile.</p></div>
+        <div class="channel-theory"><div><strong>16 shapes × 16 colors</strong><span>256 visual combinations</span></div><div><strong>RGB8</strong><span>24 bits = 16,777,216 digital RGB values</span></div><div><strong>RGBA8</strong><span>32 bits = 4,294,967,296 digital combinations</span></div></div><p class="panel-footnote">RGB and RGBA counts describe raw channel combinations, not guaranteed distinguishable glyphs or reduced storage. Alpha is transparency, not independent “blackness”; black (K) belongs to CMYK. Visual color should never be the only decoder without a robust underlying numeric encoding.</p>
+      </section>
+      <section class="lower-grid"><article class="lab-panel liquid-panel mini-playground" data-mobile-screen="message"><div class="panel-head"><div><span class="section-overline">04 / YOUR DATA</span><h2>Try a real message</h2><p>Live UTF-8 → bytes → composed glyph tiles.</p></div><span class="panel-icon violet" aria-hidden="true">⌘</span></div><label class="sr-only" for="message-input">Message to encode</label><textarea id="message-input" rows="2" spellcheck="false">BinBol: From Binary to Symbol</textarea><div class="sample-metrics"><span><strong id="message-bytes">0</strong> UTF-8 bytes</span><span><strong id="message-digits">0</strong> binary digits</span><span><strong id="message-tokens">0</strong> 8-bit tiles</span></div><div class="live-sample" id="message-glyphs" aria-label="Encoded visual tiles"></div><p class="panel-footnote">The tiles use a deliberately demonstrative 16×16 composed glyph system. This is not the final BinBol wire format.</p></article><article class="lab-panel liquid-panel bench-panel" data-mobile-screen="research"><div class="panel-head"><div><span class="section-overline">05 / REAL MEASUREMENTS</span><h2>Representation ≠ compression</h2><p>A documented repeated-command benchmark.</p></div><span class="panel-icon mint" aria-hidden="true">⌁</span></div><div class="bench-bars"><div class="bench-row"><span>Raw UTF-8</span><div class="bench-track"><i style="width:100%"></i></div><b>200 B</b></div><div class="bench-row"><span>Gzip</span><div class="bench-track"><i style="width:24%"></i></div><b>48 B</b></div><div class="bench-row"><span>Brotli</span><div class="bench-track"><i style="width:16.5%"></i></div><b>33 B</b></div><div class="bench-row"><span>Zstandard</span><div class="bench-track"><i style="width:22.5%"></i></div><b>45 B</b></div><div class="bench-row"><span>BinBol · shared dict.</span><div class="bench-track"><i style="width:11.5%"></i></div><b>23 B</b></div><div class="bench-row"><span>BinBol · embedded dict.</span><div class="bench-track"><i style="width:26%"></i></div><b>52 B</b></div></div><p class="panel-footnote">200-byte repeated sample; shared-dictionary distribution excluded. Not evidence of universal compression. <a href="https://github.com/DorManDel/Binbol/blob/main/benchmarks/RESULTS_2026-11-18.md" target="_blank" rel="noopener noreferrer">Read the benchmark ↗</a></p></article></section>
+      <section class="sources-panel liquid-panel" data-mobile-screen="research" id="sources"><div><span class="section-overline">06 / TRACEABLE REFERENCES</span><h2>Where the numbers come from</h2><p>Sizes are dated examples, not a byte-for-byte upload of the original artifacts.</p></div><div class="source-links"><a target="_blank" rel="noopener noreferrer" href="https://chciken.com/game/boy/2026/03/21/rom-hacking-a-game-boy-game.html"><strong>Game Boy cartridges</strong><small>Tetris 32 KiB · Mario 64 KiB</small><span>↗</span></a><a target="_blank" rel="noopener noreferrer" href="https://moreorless.io/game/game-file-size/data"><strong>Pokémon Red</strong><small>1 MiB cartridge-size example</small><span>↗</span></a><a target="_blank" rel="noopener noreferrer" href="https://apollojournals.org/afj/compessay.html"><strong>Apollo Guidance Computer</strong><small>36,864 × 16-bit fixed rope words</small><span>↗</span></a><a target="_blank" rel="noopener noreferrer" href="https://fossies.org/linux/kernel/v7.3/linux-7.3.tar.xz/cloc.html"><strong>Linux 7.3 kernel</strong><small>162,399,360-B .tar.xz archive (compressed); 30.96M code lines</small><span>↗</span></a></div></section>
+    </main>
+    <footer class="site-footer"><span>BINBOL / EXPERIMENTAL REPRESENTATIONS</span><span>No ROMs or proprietary source distributed.</span><a href="BinBol-Landing-Live-Preview.html">Back to Home ↑</a></footer>
+  </div>
+</body>
+</html>
