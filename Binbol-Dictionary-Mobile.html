@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100d1e"><meta name="description" content="Binbol Dictionary Registry: compose, encode, inspect, share and decode semantic tiles.">
+<title>Dictionary Lab — Binbol</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0b17;--text:#f6f1ff;--muted:#bbb0d3;--stroke:#51486d;--lav:#b59af8;--gold:#f5d06e;--panel:rgba(30,27,52,.84);--dark:#111123;--good:#85dfb7;--bad:#ff9eab;font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);line-height:1.5;min-width:320px;overflow-x:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}a{color:inherit}a:hover{color:var(--gold)}.atmosphere{position:fixed;z-index:-1;inset:0;background:radial-gradient(ellipse 70% 40% at 20% 8%,#44286a90,transparent),radial-gradient(ellipse 75% 50% at 90% 50%,#29305e55,transparent),#0d0b17;pointer-events:none}.shell{max-width:1220px;margin:auto;padding-inline:clamp(16px,3vw,36px)}.masthead{min-height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #64588766}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;font-size:25px;font-weight:900;letter-spacing:1px}.brand small{display:block;font-size:10px;letter-spacing:3px;font-weight:700;color:#b7a7d9}.brand-symbol{display:grid;place-items:center;width:43px;height:43px;border:1px solid #a58fe8;border-radius:14px;background:linear-gradient(135deg,#32264b,#6c4a9b);color:#ecd8ff}.brand-symbol svg{width:25px}.gold{color:var(--gold)}.back-link{font-size:13px;color:#d0baff;text-underline-offset:4px}.hero{padding:54px 0 29px}.overline,.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#c4aaff}.pulse{display:inline-block;width:8px;height:8px;background:#91d9c0;box-shadow:0 0 14px #91d9c0;border-radius:100%;margin-right:8px}.dotsep{padding:0 10px;color:#877f9f}.hero h1{font-size:clamp(42px,6.2vw,76px);letter-spacing:-.05em;line-height:1.06;margin:17px 0 18px}.hero h1 em{font-style:normal;color:var(--lav)}.hero p{max-width:780px;font-size:clamp(15px,1.5vw,19px);color:#d2c9e4;line-height:1.65}.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.pill-row span{background:#28233d;border:1px solid #5f527e;padding:8px 12px;color:#d9d0ea;border-radius:80px;font-size:11px}.tabs{display:flex;gap:8px;border-bottom:1px solid #615582;padding:10px 0 14px;overflow-x:auto;scrollbar-width:thin}.tab{white-space:nowrap;border:1px solid #5d5078;background:#211c34;border-radius:12px;padding:13px 18px;color:#d6caec;font-size:13px;font-weight:750}.tab.active{border-color:#c6aeff;background:#56417f;box-shadow:inset 0 0 0 1px #ac95e866;color:#fff}.page{display:none;padding:37px 0 60px}.page.active{display:block}.section-intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}.section-intro h2{font-size:clamp(27px,3.6vw,42px);margin:9px 0 0;letter-spacing:-.03em}.section-intro>p{max-width:485px;font-size:14px;color:#cfc4dc;line-height:1.75;margin:0}.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.panel{border:1px solid #75668d;background:var(--panel);backdrop-filter:blur(20px);border-radius:25px;padding:clamp(16px,2.3vw,27px);box-shadow:0 18px 45px #06050c38}.panel-header{display:flex;align-items:start;justify-content:space-between;gap:12px;margin-bottom:19px}.panel-header h3{font-size:23px;letter-spacing:-.03em;margin:7px 0}.tag{font-size:10px;letter-spacing:.8px;color:#e3d5ff;border:1px solid #7c6b9a;border-radius:25px;padding:7px 10px;white-space:nowrap}.field{display:flex;flex-direction:column;gap:8px;font-size:12px;color:#c8badc;margin:0 0 16px;font-weight:750}.field textarea,.field input,.field select{width:100%;background:#0c1020;border:1px solid #655a86;border-radius:14px;padding:12px 13px;color:#eee9ff;outline:none;line-height:1.55;min-height:46px}.field textarea{min-height:98px;resize:vertical;font:13px/1.65 ui-monospace,Consolas,monospace}.field small{font-size:10px;font-weight:400;color:var(--muted)}#source{min-height:220px;font-size:14px}.field select{appearance:auto}.form-grid{display:grid;grid-template-columns:2fr 1fr;gap:10px}.buttons{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.button{border:1px solid #61547e;border-radius:12px;padding:11px 15px;min-height:45px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;line-height:1.3}.button.primary{background:linear-gradient(125deg,#9f83ee,#c8adff);color:#151020;border-color:#ae90ff}.button.secondary{background:#2a2540;color:#f5edff}.button.subtle{background:transparent;color:#c7b8e0}.button:active{transform:translateY(1px)}.hint{font-size:12px;color:var(--muted);line-height:1.7;margin:14px 0 0}.tile-strip{display:flex;gap:10px;align-items:stretch;overflow-x:auto;padding:5px 2px 17px;min-height:133px}.tile-card{position:relative;border:1px solid #72648f;background:#201c36;border-radius:15px;min-width:100px;max-width:126px;padding:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:5px;scroll-snap-align:start;transition:.2s;overflow:hidden}.tile-card[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px #f5d06e44}.tile-card:hover{transform:translateY(-3px)}.tile-icon{height:48px;display:grid;place-items:center;font-size:28px;line-height:1}.tile-card strong{font-size:10px;text-align:center;overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap}.tile-card small{font-size:10px;color:#d7c8ff}.tile-card.literal{border-style:dashed;border-color:#b19b7e}.tile-card.literal .tile-icon{color:#f4d28c}.inspector{min-height:150px;background:#101024;border:1px solid #665b83;border-radius:16px;padding:18px;margin-bottom:15px;overflow-wrap:anywhere}.inspector-placeholder{color:#bfb3d4;font-size:13px}.inspector h4{font-size:18px;margin:3px 0 9px}.inspector .ins-meta{color:#b9a6dd;font-size:11px;letter-spacing:.3px}.inspector pre{white-space:pre-wrap;word-break:break-word;background:#090d19;border-radius:12px;color:#e8e4f5;padding:12px;font:12px/1.6 ui-monospace,Consolas,monospace;margin:9px 0;max-height:250px;overflow:auto}.recipe-tree{display:grid;gap:5px;font-size:12px;padding-left:11px;border-left:2px solid #9b79ef;margin-top:10px}.recipe-tree .indent{color:#c4b3e6}.mini-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0 18px}.mini-stats>div{border:1px solid #5b5278;border-radius:13px;background:#15152a;padding:13px 10px;min-width:0}.mini-stats small{display:block;font-size:10px;color:#c3b7d7;min-height:32px}.mini-stats strong{font-size:clamp(16px,2vw,24px);color:#fff;display:block;margin-top:5px}.entry-list{display:grid;gap:9px;max-height:650px;overflow-y:auto;padding-right:4px}.entry-row{width:100%;display:flex;align-items:center;gap:13px;text-align:left;border:1px solid #5c5378;background:#18182f;border-radius:14px;color:#ece6ff;padding:12px}.entry-row:hover{background:#272443}.entry-emoji{height:40px;width:40px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;font-size:21px;background:#38304f}.entry-row span:nth-child(2){flex:1;min-width:0}.entry-row strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis}.entry-row small{font-size:10px;color:#c1b3d8}.entry-row .id{color:var(--gold);font:11px ui-monospace,monospace}.notification{border:1px solid #71658d;background:#181c32;color:#d6cbe8;border-radius:13px;padding:13px;font-size:12px;margin:13px 0;overflow-wrap:anywhere}.notification.success{border-color:#4a9b83;color:var(--good)}.notification.error{border-color:#a95a77;color:var(--bad)}.file-button input{display:none}.hidden{display:none!important}#packet-text,#received-text{font-size:11px;line-height:1.6;word-break:break-all}#received-output{min-height:155px}.flow-track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.flow-step{border:1px solid #716285;background:#1b1b35;color:#e9dcf8;padding:15px 8px;border-radius:13px;display:grid;gap:6px;justify-items:center}.flow-step span{color:#b8a4e6;font-size:12px}.flow-step b{font-size:12px}.flow-step.on{border-color:#d4b8ff;background:#4b376b;box-shadow:0 0 24px #af84e955}.flow-details{background:#121226;border-radius:16px;border:1px solid #61557d;padding:23px;margin:22px 0 15px}.flow-details h3{margin:8px 0;font-size:24px}.flow-details p{color:#cac0db;line-height:1.7;font-size:14px}.flow-details pre{background:#0a1020;color:#e8dbff;white-space:pre-wrap;word-break:break-word;padding:19px;border-radius:13px;font:13px/1.7 ui-monospace,Consolas,monospace;min-height:65px}.pipeline-panel{padding:25px}.flow-actions{justify-content:flex-end}.spacer-top{margin-top:42px}.security-track{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.security-track>div{padding:13px;border:1px solid #6f5d8c;border-radius:12px;background:#201b37;font-size:12px;font-weight:800}.security-track>span{color:#bba8ed}.security-track .secure{border-color:#e2c175;background:#3b2f37}.security-track small{display:block;color:#eedc9e;font-size:9px;margin-top:3px}.caution{margin-top:17px;border-left:3px solid #e4b96a;border-radius:10px;padding:18px;background:#2b2433;font-size:13px;color:#e9d8bb;line-height:1.8}.metrics-roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metrics-roadmap>div{border:1px solid #60577d;border-radius:15px;padding:19px;background:#201d35}.metrics-roadmap b{color:#d4b9ff}.metrics-roadmap p{font-size:12px;color:#c9bfd9}.footer{border-top:1px solid #4f446b;padding-block:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:10px;letter-spacing:.6px;color:#a99fbd;margin-bottom:14px}@media(max-width:850px){.cols{grid-template-columns:1fr}.section-intro{display:block}.section-intro>p{margin-top:12px}.metrics-roadmap{grid-template-columns:repeat(2,1fr)}}@media(max-width:580px){.masthead{min-height:74px}.brand{font-size:21px}.brand-symbol{width:36px;height:36px}.back-link{font-size:11px}.hero{padding-top:34px}.hero p{font-size:14px}.page{padding-top:22px}.tabs{gap:7px}.tab{padding:11px 13px;font-size:11px}.panel{border-radius:19px}.panel-header h3{font-size:21px}.mini-stats small{min-height:39px;font-size:9px}.mini-stats strong{font-size:17px}.button{flex:1 1 auto}.form-grid{grid-template-columns:1fr 102px}.flow-track{overflow-x:auto;display:flex;padding-bottom:9px;scroll-snap-type:x mandatory}.flow-step{flex:0 0 95px;scroll-snap-align:start;min-height:76px}.security-track{gap:6px}.security-track>div{font-size:10px;padding:10px}.metrics-roadmap{grid-template-columns:1fr 1fr}.footer{font-size:9px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<div class="atmosphere" aria-hidden="true"></div>
+<header class="masthead shell">
+<a class="brand" href="#" title="Offline demo"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="3"/><path d="M24 12 36 24 24 36 12 24 24 12Z" fill="currentColor" opacity=".65"/></svg></span><span>BIN<span class="gold">BOL</span><small>DICTIONARY LAB</small></span></a>
+<a href="#" class="back-link">Dictionary Lab · Offline</a>
+</header>
+<main class="shell">
+<section class="hero"><div class="overline"><span class="pulse"></span> INTERACTIVE RESEARCH LAB <span class="dotsep">/</span> v0.5</div>
+<h1>One identity.<br><em>Many meanings.</em></h1>
+<p>Define a dictionary, turn text or a tiny program into semantic tiles, send a binary packet to another computer, and expand it like a recipe. Inspect every byte and assumption along the way.</p>
+<div class="pill-row"><span>● Lossless text</span><span>● Multi-dictionary registry</span><span>● Cycles rejected</span><span>● No code execution</span></div>
+</section>
+<nav class="tabs" aria-label="Lab pages">
+<button type="button" data-tab="compose" class="tab active" aria-selected="true">01 / Compose</button>
+<button type="button" data-tab="registry" class="tab" aria-selected="false">02 / Dictionaries</button>
+<button type="button" data-tab="transport" class="tab" aria-selected="false">03 / Two computers</button>
+<button type="button" data-tab="pipeline" class="tab" aria-selected="false">04 / How it works</button>
+</nav>
+<section class="page active" data-page="compose" aria-label="Compose and encode">
+ <div class="section-intro"><div><span class="overline">TEXT → IDENTIFIERS → TILES</span><h2>Write it. Tile it. Open it.</h2></div><p>Start with <strong>CHECK_PLAYER</strong>, a named recipe made of four smaller definitions. Or write any text. Unknown characters are preserved as literal UTF-8.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">SOURCE / A</span><h3>Program or message</h3></div><span class="tag">EDITABLE</span></div>
+   <label class="field">Active dictionary<select id="active-dictionary"></select></label>
+   <label class="field">Source text<textarea id="source" rows="10" spellcheck="false" dir="auto"></textarea></label>
+   <div class="buttons wrap-buttons"><button class="button secondary" id="preset-check">🛡 CHECK_PLAYER</button><button class="button secondary" id="preset-hello">💬 Hello world</button><button class="button primary" id="encode">Encode → Tiles</button></div>
+   <p class="hint">A tile can represent a known entry. When no entry matches, Binbol includes the original bytes as a literal, so nothing disappears.</p>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">OUTPUT / B</span><h3>Semantic tile strip</h3></div><span class="tag" id="tile-count">0 TILES</span></div>
+   <div id="tiles" class="tile-strip" aria-label="Encoded tiles"></div>
+   <div class="inspector" id="inspector"><div class="inspector-placeholder">Tap a tile to inspect its dictionary, ID and full expansion.</div></div>
+   <div class="mini-stats"><div><small>Original UTF-8</small><strong id="raw-count">—</strong></div><div><small>Shared-dict packet</small><strong id="shared-count">—</strong></div><div><small>Embedded-dict packet</small><strong id="embedded-count">—</strong></div></div>
+   <div class="buttons"><button class="button secondary" id="save-as-entry">＋ Save source as a tile</button><button class="button primary" id="go-transport">Send to computer B →</button></div>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="registry" aria-label="Dictionary registry and editor">
+ <div class="section-intro"><div><span class="overline">MASTER REGISTRY → DICTIONARIES → ENTRIES</span><h2>Recipes made of recipes.</h2></div><p>Choose a dictionary, create a text definition or compose an existing set of entries. Each entry has a stable numeric ID and a glyph for display.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">REGISTRY EDITOR</span><h3>Create an entry</h3></div><span class="tag">NO EVAL</span></div>
+   <label class="field">Dictionary<select id="edit-dictionary"></select></label>
+   <div class="form-grid"><label class="field">Name<input id="entry-name" maxlength="64" value="MY_MESSAGE" spellcheck="false"></label><label class="field">Symbol / tile<input id="entry-glyph" maxlength="16" value="💠" spellcheck="false"></label></div>
+   <label class="field">Entry type<select id="entry-kind"><option value="text">Text / code expansion</option><option value="recipe">Recipe — reference other entries</option></select></label>
+   <label class="field" id="text-wrap">Text to expand<textarea id="entry-text" rows="5" spellcheck="false">Hello Binbol!</textarea></label>
+   <label class="field hidden" id="refs-wrap">References (comma-separated)<textarea id="entry-refs" rows="4" spellcheck="false">code:1, code:2, code:3, code:4</textarea><small>For example: code:1, code:2, testing:1</small></label>
+   <div class="buttons"><button id="add-entry" class="button primary">＋ Add to registry</button><button id="test-cycle" class="button secondary">Test circular reference</button></div>
+   <div id="editor-alert" class="notification" role="status" aria-live="polite">Built-in entries and custom definitions use the same decoder. References must exist and form an acyclic graph.</div>
+   <div class="buttons"><button id="export-registry" class="button secondary">↓ Export registry JSON</button><label class="button secondary file-button">↑ Import JSON<input id="import-registry" type="file" accept=".json,application/json"></label><button id="reset-registry" class="button subtle">Reset</button></div>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">DICTIONARY CONTENT</span><h3 id="registry-heading">Code recipes</h3></div><span id="registry-hash" class="tag">—</span></div>
+   <div id="dictionary-entries" class="entry-list"></div>
+   <p class="hint">Click an entry to expand it. A registry fingerprint catches accidental mismatches, but is not a cryptographic signature.</p>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="transport" aria-label="Two-computer transfer">
+ <div class="section-intro"><div><span class="overline">COMPUTER A → PACKET → COMPUTER B</span><h2>Share meaning with a known dictionary.</h2></div><p>Transfer the Base64 packet text or a binary file between devices. The receiver must have the identical registry, unless the dictionary is embedded in the packet.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">COMPUTER A / SENDER</span><h3>Create a binary packet</h3></div><span class="tag">BND1</span></div>
+   <label class="field">Transfer mode<select id="transport-mode"><option value="shared">Shared dictionary — receiver has registry</option><option value="embedded">Embedded dictionary — send definitions too</option></select></label>
+   <label class="field">ID packing strategy<select id="strategy"><option value="auto">Auto: choose smaller payload</option><option value="flat">Flat: every ID contains its dictionary ID</option><option value="context">Context: switch dictionary when needed</option></select></label>
+   <div class="buttons"><button id="packet-build" class="button primary">Encode packet</button><button id="packet-copy" class="button secondary">Copy packet</button><button id="packet-save" class="button secondary">↓ .bndr file</button></div>
+   <label class="field">Packet text (Base64 transport envelope)<textarea rows="6" spellcheck="false" readonly id="packet-text" dir="ltr"></textarea></label>
+   <div class="mini-stats"><div><small>Binary on wire</small><strong id="packet-size">—</strong></div><div><small>Payload only</small><strong id="payload-size">—</strong></div><div><small>Full dictionary</small><strong id="registry-size">—</strong></div></div>
+   <p class="hint">Base64 is for easy copying. Its text is usually larger than the underlying binary packet. Packet bytes include protocol framing and, when selected, dictionary data.</p>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">COMPUTER B / RECEIVER</span><h3>Paste and decode</h3></div><span class="tag" id="receive-badge">READY</span></div>
+   <label class="field">Received packet<textarea id="received-text" rows="6" spellcheck="false" placeholder="Paste a BND1:… packet from another computer" dir="ltr"></textarea></label>
+   <div class="buttons"><button id="paste-sender" class="button secondary">↓ Use A's packet</button><button id="decode-packet" class="button primary">Decode on B</button><label class="button secondary file-button">↑ Open .bndr<input id="open-packet" type="file" accept=".bndr,application/octet-stream"></label><button id="wrong-registry" class="button secondary">Test mismatched registry</button></div>
+   <label class="field">Reconstructed message<textarea id="received-output" rows="7" readonly dir="auto" spellcheck="false"></textarea></label>
+   <div id="transfer-status" class="notification" role="status" aria-live="polite">This is local simulation: no live network connection and no encryption.</div>
+   <p class="hint">Try Shared mode, then modify the registry and decode again. Embedded mode is self-contained but can be much larger.</p>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="pipeline" aria-label="Conceptual and security pipelines">
+ <div class="section-intro"><div><span class="overline">OPEN EACH LAYER</span><h2>Follow the bits.</h2></div><p>Click through the stages to see where dictionaries, RAM, decoding, execution and visual tiles fit. A renderer is not a substitute for an instruction interpreter.</p></div>
+ <article class="panel pipeline-panel"><div class="flow-track" id="flow-track">
+  <button type="button" data-step="0" class="flow-step on"><span>01</span><b>Source</b></button><button type="button" data-step="1" class="flow-step"><span>02</span><b>Dictionary</b></button><button type="button" data-step="2" class="flow-step"><span>03</span><b>Binary file</b></button><button type="button" data-step="3" class="flow-step"><span>04</span><b>RAM / Decode</b></button><button type="button" data-step="4" class="flow-step"><span>05</span><b>Meaning / Tile</b></button>
+ </div><div class="flow-details"><span class="overline" id="flow-label">STEP 1 / 5</span><h3 id="flow-title">Source: the original message</h3><p id="flow-description">We begin with ordinary text or a tiny program. Nothing is compressed yet.</p><pre id="flow-data">LOAD player.health</pre></div>
+ <div class="buttons flow-actions"><button id="step-back" class="button secondary">← Previous</button><button id="step-next" class="button primary">Next →</button><button id="step-play" class="button secondary">▶ Play</button></div>
+ </article>
+ <div class="section-intro spacer-top"><div><span class="overline">SECURITY BOUNDARY</span><h2>Encoding is not encryption.</h2></div><p>Dictionary secrecy might disguise text, but the protocol needs standard authenticated encryption to protect real conversations.</p></div>
+ <div class="security-track"><div>Source text</div><span>→</span><div>Registry / codec</div><span>→</span><div class="secure">Authenticated encryption<br><small>separate, not implemented</small></div><span>→</span><div>Network</div><span>→</span><div>Verify · decode</div></div>
+ <div class="caution"><strong>Research caveat:</strong> the prototype uses a 32-bit, non-cryptographic registry checksum for mismatch detection, not authentication. Never rely on this packet format for confidentiality. Compressing secrets together with attacker-controlled text can leak information via message lengths.</div>
+ <div class="section-intro spacer-top"><div><span class="overline">WHAT TO TEST NEXT</span><h2>Do we actually win?</h2></div></div>
+ <div class="metrics-roadmap"><div><b>Storage</b><p>Compare complete packet size, including shared-dictionary distribution when relevant.</p></div><div><b>Speed</b><p>Measure real encode/decode latency across many iterations and devices.</p></div><div><b>Reliability</b><p>Test Unicode, invalid packets, version mismatch, loops and nested recipes.</p></div><div><b>Readability</b><p>Check whether people understand tiles faster than source code.</p></div></div>
+ </section>
+</main>
+<footer class="shell footer"><span>BINBOL / DICTIONARY REGISTRY V1</span><span>Experimental · No network · No encryption · No arbitrary code execution</span><a href="#">Dictionary Lab · Offline</a></footer>
+<script>
+/* Binbol Dictionary Registry v1. Educational lossless codec, NOT encryption. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;root.BinbolRegistry=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+'use strict';
+const te=new TextEncoder(),td=new TextDecoder('utf-8',{fatal:true});
+const MAGIC=[66,78,68,82], VERSION=1, MAX_RAW=20000, MAX_PACKET=150000, MAX_DICT=64000, MAX_DEPTH=12, MAX_EXPANDED=20000;
+const initial=()=>({version:1,dictionaries:[
+ {id:1,key:'code',name:'Code recipes',color:'#A78BFA',entries:[
+  {id:1,glyph:'▣',name:'LOAD_HEALTH',kind:'text',text:'LOAD player.health\n'},
+  {id:2,glyph:'◇',name:'COMPARE_ZERO',kind:'text',text:'COMPARE 0\n'},
+  {id:3,glyph:'↳',name:'JUMP_IF_LE',kind:'text',text:'JUMP_IF_LE gameOver\n'},
+  {id:4,glyph:'◎',name:'PRINT_ALIVE',kind:'text',text:'PRINT Player alive\n'},
+  {id:5,glyph:'🛡',name:'CHECK_PLAYER',kind:'recipe',refs:['code:1','code:2','code:3','code:4']},
+  {id:6,glyph:'⚔',name:'DAMAGE_PLAYER',kind:'text',text:'player.health -= damage;\n'},
+  {id:7,glyph:'↩',name:'RETURN',kind:'text',text:'return 0;\n'}] },
+ {id:2,key:'testing',name:'Testing',color:'#42C6AC',entries:[
+  {id:1,glyph:'✓',name:'ASSERT_EQUAL',kind:'text',text:'assert.equal(actual, expected);\n'},
+  {id:2,glyph:'☑',name:'ASSERT_TRUE',kind:'text',text:'assert.ok(result);\n'},
+  {id:3,glyph:'◈',name:'LOG_RESULT',kind:'text',text:'console.log(result);\n'},
+  {id:4,glyph:'🧪',name:'TEST_FLOW',kind:'recipe',refs:['testing:2','testing:3']}]},
+ {id:3,key:'chat',name:'Messages',color:'#F4C469',entries:[
+  {id:1,glyph:'👋',name:'HELLO',kind:'text',text:'Hello'},
+  {id:2,glyph:'🌍',name:'WORLD',kind:'text',text:' world'},
+  {id:3,glyph:'✨',name:'BANG',kind:'text',text:'!'},
+  {id:4,glyph:'💬',name:'HEBREW_HELLO',kind:'text',text:'שלום'},
+  {id:5,glyph:'🌊',name:'HEBREW_WORLD',kind:'text',text:' עולם'},
+  {id:6,glyph:'🎉',name:'HEBREW_MESSAGE',kind:'recipe',refs:['chat:4','chat:5']}]}]});
+const byteLen=s=>te.encode(s).length;
+function fail(x){throw Error(x);}
+function validate(r){
+ if(!r||r.version!==1||!Array.isArray(r.dictionaries)||r.dictionaries.length<1||r.dictionaries.length>16)fail('Invalid registry version or dictionary count.');
+ const keys=new Set(),ids=new Set(),lookup=new Map();let count=0;
+ for(const d of r.dictionaries){
+  if(!Number.isInteger(d.id)||d.id<1||d.id>255||ids.has(d.id))fail('Duplicate or invalid dictionary ID.');ids.add(d.id);
+  if(typeof d.key!=='string'||!/^[a-z][a-z0-9_-]{0,23}$/.test(d.key)||keys.has(d.key))fail('Dictionary keys must be unique ASCII identifiers.');keys.add(d.key);
+  if(typeof d.name!=='string'||!d.name||d.name.length>50)fail('Invalid dictionary name.');
+  if(typeof d.color!=='string'||!/^#[0-9a-fA-F]{6}$/.test(d.color))fail('Invalid color.');
+  if(!Array.isArray(d.entries)||d.entries.length>64)fail('Max 64 entries per dictionary.');
+  const eids=new Set();
+  for(const e of d.entries){
+   count++;if(count>256)fail('Max 256 total entries.');
+   if(!Number.isInteger(e.id)||e.id<1||e.id>255||eids.has(e.id))fail('Duplicate or invalid entry ID.');eids.add(e.id);
+   if(typeof e.name!=='string'||!e.name||e.name.length>64||typeof e.glyph!=='string'||!e.glyph||[...e.glyph].length>10)fail('Invalid entry name or glyph.');
+   if(e.kind==='text'){
+    if(typeof e.text!=='string'||!e.text||byteLen(e.text)>2048)fail('A text entry must contain 1–2048 UTF-8 bytes.');
+   }else if(e.kind==='recipe'){
+    if(!Array.isArray(e.refs)||!e.refs.length||e.refs.length>16||!e.refs.every(v=>typeof v==='string'&&/^[a-z][a-z0-9_-]{0,23}:\d{1,3}$/.test(v)))fail('Recipe expects up to 16 refs like code:1.');
+   }else fail('Unknown entry kind.');
+   lookup.set(d.key+':'+e.id,{dictionary:d,entry:e});
+  }
+ }
+ const done=new Set(),active=new Set();
+ function visit(ref,depth){
+  if(depth>MAX_DEPTH)fail('Recipe nesting limit exceeded (12).');
+  if(active.has(ref))fail('Circular dictionary reference: '+ref);
+  const item=lookup.get(ref);if(!item)fail('Unknown recipe reference: '+ref);
+  if(done.has(ref))return;
+  active.add(ref);
+  if(item.entry.kind==='recipe')for(const child of item.entry.refs)visit(child,depth+1);
+  active.delete(ref);done.add(ref);
+ }
+ for(const key of lookup.keys())visit(key,0);
+ if(byteLen(JSON.stringify(r))>MAX_DICT)fail('Dictionary file exceeds 64 KB.');
+ return r;
+}
+function byKey(r,key){const x=r.dictionaries.find(d=>d.key===key);if(!x)fail('Unknown dictionary '+key);return x;}
+function byId(r,id){const x=r.dictionaries.find(d=>d.id===id);if(!x)fail('Unknown dictionary ID '+id);return x;}
+function get(r,ref){const [key,id]=ref.split(':');const d=byKey(r,key);const e=d.entries.find(x=>x.id===Number(id));if(!e)fail('Missing entry '+ref);return {d,e};}
+function expand(r,ref,depth=0){if(depth>MAX_DEPTH)fail('Recipe expansion depth exceeded.');const {e}=get(r,ref);if(e.kind==='text')return e.text;let out='';for(const child of e.refs){out+=expand(r,child,depth+1);if(byteLen(out)>MAX_EXPANDED)fail('Expansion exceeds 20 KB.');}return out;}
+function flat(r,ref,depth=0){const {e}=get(r,ref);if(e.kind==='text')return [{ref,text:e.text,depth}];let out=[{ref,text:'',depth}];for(const c of e.refs){out.push(...flat(r,c,depth+1));if(out.length>512)fail('Expanded recipe too long.');}return out;}
+function addEntry(r,key,input){const n=JSON.parse(JSON.stringify(r));const d=byKey(n,key);const next=Math.max(0,...d.entries.map(e=>e.id))+1;if(next>255||d.entries.length>=64)fail('Dictionary entry capacity reached.');
+ const name=String(input.name||'').trim();const glyph=String(input.glyph||'').trim();const kind=input.kind==='recipe'?'recipe':'text';
+ const ent={id:next,glyph,name,kind};
+ if(kind==='text')ent.text=String(input.text||'');
+ else ent.refs=String(input.refs||'').split(/[\s,]+/).filter(Boolean);
+ d.entries.push(ent);validate(n);return n;
+}
+function canonical(r){validate(r);return JSON.stringify(r);}
+function fnv32(bytes){let h=0x811c9dc5;for(const b of bytes){h=Math.imul(h^b,0x01000193)>>>0;}return h>>>0;}
+function fingerprint(r){return fnv32(te.encode(canonical(r)));}
+function u32(out,v){out.push((v>>>24)&255,(v>>>16)&255,(v>>>8)&255,v&255);}
+function readU32(b,p){if(p.i+4>b.length)fail('Truncated 32-bit field.');const x=(((b[p.i]<<24)>>>0)+(b[p.i+1]<<16)+(b[p.i+2]<<8)+b[p.i+3])>>>0;p.i+=4;return x;}
+function varWrite(out,n){do{let x=n&127;n=Math.floor(n/128);out.push(x|(n?128:0));}while(n);}
+function varRead(b,p){let n=0,shift=0;for(let i=0;i<4;i++){if(p.i>=b.length)fail('Truncated variable length.');const x=b[p.i++];n+=(x&127)*2**shift;if(!(x&128)){if(n>MAX_PACKET)fail('Length exceeds limit.');return n;}shift+=7;}fail('Invalid variable-length integer.');}
+function literalsToken(str,out){if(!str)return;const bytes=te.encode(str);out.push(0);varWrite(out,bytes.length);out.push(...bytes);}
+function matches(r,key){const d=byKey(r,key);return d.entries.map(e=>({d,e,text:expand(r,key+':'+e.id)})).filter(v=>v.text).sort((a,b)=>b.text.length-a.text.length||a.e.id-b.e.id);}
+function tokenize(r,key,source){const dict=matches(r,key),tokens=[];let pos=0,literal='';const flush=()=>{if(literal){tokens.push({kind:'literal',text:literal});literal='';}};
+ while(pos<source.length){const hit=dict.find(x=>source.startsWith(x.text,pos));if(hit){flush();tokens.push({kind:'entry',dictionary:hit.d,entry:hit.e,text:hit.text});pos+=hit.text.length;}
+ else{const point=source.codePointAt(pos);const char=String.fromCodePoint(point);literal+=char;pos+=char.length;}}
+ flush();return tokens;
+}
+function payload(tokens,profile){const out=[];let context=0;for(const t of tokens){
+ if(t.kind==='literal'){literalsToken(t.text,out);continue;}
+ if(profile==='flat'){out.push(1,t.dictionary.id,t.entry.id);}else{if(context!==t.dictionary.id){out.push(2,t.dictionary.id);context=t.dictionary.id;}out.push(3,t.entry.id);}
+ }return Uint8Array.from(out);}
+function encode(source,registry,key,transport='shared',strategy='auto'){
+ validate(registry);if(typeof source!=='string'||byteLen(source)>MAX_RAW)fail('Input is limited to 20 KB UTF-8.');
+ const d=byKey(registry,key);if(!['shared','embedded'].includes(transport))fail('Invalid transport type.');
+ if(!['auto','flat','context'].includes(strategy))fail('Invalid strategy.');
+ const tokens=tokenize(registry,key,source),f=payload(tokens,'flat'),c=payload(tokens,'context');
+ const profile=strategy==='auto'?(c.length<f.length?'context':'flat'):strategy;
+ const p=profile==='context'?c:f;
+ const registryData=te.encode(canonical(registry));
+ const out=[...MAGIC,VERSION,transport==='embedded'?1:0,profile==='context'?1:0];
+ u32(out,fingerprint(registry));out.push(d.id);u32(out,p.length);
+ if(transport==='embedded'){u32(out,registryData.length);out.push(...registryData);}
+ out.push(...p);
+ if(out.length>MAX_PACKET)fail('Packet exceeds 150 KB.');
+ return {bytes:Uint8Array.from(out),tokens,profile,rawBytes:byteLen(source),dictionaryBytes:transport==='embedded'?4+registryData.length:0,payloadBytes:p.length,headerBytes:16,transport,checksum:fingerprint(registry)};
+}
+function parse(packet,localRegistry){const b=packet instanceof Uint8Array?packet:new Uint8Array(packet);if(b.length>MAX_PACKET||b.length<16)fail('Packet length invalid.');const p={i:0};for(let i=0;i<4;i++)if(b[p.i++]!==MAGIC[i])fail('Invalid BNDR signature.');if(b[p.i++]!==VERSION)fail('Unsupported packet version.');
+ const flags=b[p.i++],profile=b[p.i++];if(flags>1||profile>1)fail('Unsupported packet flags.');const check=readU32(b,p);const dictId=b[p.i++];const size=readU32(b,p);let r=localRegistry;
+ if(flags===1){const length=readU32(b,p);if(length>MAX_DICT||p.i+length>b.length)fail('Invalid embedded dictionary length.');try{r=JSON.parse(td.decode(b.slice(p.i,p.i+length)));}catch(e){fail('Invalid embedded registry JSON.');}p.i+=length;}
+ if(!r)fail('Receiver has no shared registry.');validate(r);if(fingerprint(r)!==check)fail('Registry mismatch. Receiver needs exact same dictionary version and entries.');
+ byId(r,dictId);
+ if(p.i+size!==b.length)fail('Truncated packet or trailing bytes.');
+ const payloadStart=p.i,payloadEnd=p.i+size;let active=0,out='',tokens=[];
+ while(p.i<payloadEnd){const tag=b[p.i++];if(tag===0){const n=varRead(b,p);if(p.i+n>payloadEnd)fail('Truncated literal.');const text=td.decode(b.slice(p.i,p.i+n));p.i+=n;out+=text;tokens.push({kind:'literal',text});}
+ else if(tag===1&&profile===0){if(p.i+2>payloadEnd)fail('Truncated ID.');const d=byId(r,b[p.i++]);const entryId=b[p.i++];const e=d.entries.find(e=>e.id===entryId);if(!e)fail('Unknown entry.');const text=expand(r,d.key+':'+e.id);out+=text;tokens.push({kind:'entry',dictionary:d,entry:e,text});}
+ else if(tag===2&&profile===1){if(p.i>=payloadEnd)fail('Truncated dictionary switch.');active=b[p.i++];byId(r,active);}
+ else if(tag===3&&profile===1){if(p.i>=payloadEnd)fail('Truncated entry.');const d=byId(r,active),id=b[p.i++],e=d.entries.find(e=>e.id===id);if(!e)fail('Unknown entry.');const text=expand(r,d.key+':'+e.id);out+=text;tokens.push({kind:'entry',dictionary:d,entry:e,text});}
+ else fail('Unknown packet tag.');
+ if(byteLen(out)>MAX_EXPANDED)fail('Decoded message exceeds 20 KB.');if(tokens.length>20000)fail('Too many tokens.');
+ }
+ return {text:out,registry:r,tokens,profile:profile?'context':'flat',transport:flags?'embedded':'shared',dictionary:byId(r,dictId),checksum:check,payloadBytes:size,packetBytes:b.length};
+}
+function hex(bytes,limit=128){return Array.from(bytes.slice(0,limit),x=>x.toString(16).toUpperCase().padStart(2,'0')).join(' ')+(bytes.length>limit?' …':'');}
+function base64(bytes){let s='';for(const x of bytes)s+=String.fromCharCode(x);return 'BND1:'+btoa(s);}
+function fromBase64(str){let s=String(str).trim();if(s.startsWith('BND1:'))s=s.slice(5);if(!/^[A-Za-z0-9+/]*={0,2}$/.test(s)||s.length>210000)fail('Invalid packet text.');let decoded;try{decoded=atob(s);}catch(e){fail('Invalid Base64.');}return Uint8Array.from(decoded,c=>c.charCodeAt(0));}
+return {VERSION,initial,validate,canonical,byteLen,fingerprint,expand,flat,get,addEntry,tokenize,encode,parse,hex,base64,fromBase64};
+});
+
+</script>
+<script>
+/* Binbol Dictionary Lab v0.5. All user-defined content is rendered as text. */
+(function(){'use strict';
+const B=window.BinbolRegistry,$=id=>document.getElementById(id);
+let registry=B.initial(),currentKey='code',last=null,selected=null,stage=0,timer=null;
+const steps=[
+ ['Source: compose a message','The original text or code is represented by UTF-8 bytes. No compression has happened yet.',()=> $('source').value.slice(0,250)],
+ ['Dictionary: find matching meanings','For each known phrase or composite recipe, look up a numeric identifier. Unknown text remains literal.',()=>last?last.tokens.map(t=>t.kind==='entry'?`${t.dictionary.key}:${t.entry.id} — ${t.entry.name}`:`literal: ${JSON.stringify(t.text)}`).join('\n').slice(0,850):'Select Encode to begin.'],
+ ['Binary file: pack instructions','BNDR header identifies version, strategy, registry fingerprint and payload length. The embedded mode includes the whole registry.',()=>last?B.hex(last.bytes,128):'BND1 packet not generated yet.'],
+ ['RAM / Decoder: read bytes','On receipt, the app reads the packet into a byte buffer, checks the registry ID, and expands token IDs. This is a browser simulation, not actual CPU paging.',()=>last?`Version: 1\nProfile: ${last.profile}\nPayload: ${last.payloadBytes} B\nRegistry fingerprint: ${last.checksum.toString(16).toUpperCase().padStart(8,'0')}`:'Waiting for encoded packet.'],
+ ['Semantic meaning / visual glyph','After decoding, a program can inspect the semantic tree. Our tiles are a rendering of that tree. This lab does not execute user-authored code.',()=>last?`Reconstructed source:\n${B.parse(last.bytes,registry).text.slice(0,300)}`:'Waiting for encoded packet.']
+];
+function el(tag,className,text){const x=document.createElement(tag);if(className)x.className=className;if(text!==undefined)x.textContent=text;return x;}
+function alertTo(id,message,kind=''){const x=$(id);x.textContent=message;x.className='notification'+(kind?' '+kind:'');}
+function switchTab(name){for(const x of document.querySelectorAll('[data-tab]')){const yes=x.dataset.tab===name;x.classList.toggle('active',yes);x.setAttribute('aria-selected',String(yes));}for(const x of document.querySelectorAll('[data-page]'))x.classList.toggle('active',x.dataset.page===name);}
+for(const t of document.querySelectorAll('[data-tab]'))t.addEventListener('click',()=>switchTab(t.dataset.tab));
+function populate(){const opts=registry.dictionaries.map(d=>({val:d.key,name:d.name}));for(const id of ['active-dictionary','edit-dictionary']){const select=$(id),v=id==='active-dictionary'?currentKey:select.value;select.replaceChildren();for(const o of opts){const opt=el('option','',o.name);opt.value=o.val;select.append(opt);}select.value=opts.some(o=>o.val===v)?v:currentKey;}}
+function editorRows(){const key=$('edit-dictionary').value,d=registry.dictionaries.find(x=>x.key===key);$('registry-heading').textContent=d.name;$('registry-hash').textContent='REG 0x'+B.fingerprint(registry).toString(16).toUpperCase().padStart(8,'0');const host=$('dictionary-entries');host.replaceChildren();for(const e of d.entries){const row=el('button','entry-row');row.type='button';row.append(el('span','entry-emoji',e.glyph));const info=el('span');info.append(el('strong','',e.name),el('small','',e.kind==='recipe'?`Recipe: ${e.refs.join(', ')}`:e.text.replace(/\n/g,' ↵ ').slice(0,65)));row.append(info,el('span','id','0x'+e.id.toString(16).toUpperCase().padStart(2,'0')));row.addEventListener('click',()=>{currentKey=key;$('active-dictionary').value=key;$('source').value=B.expand(registry,key+':'+e.id);switchTab('compose');compute();selectInspector({kind:'entry',dictionary:d,entry:e,text:B.expand(registry,key+':'+e.id)});});host.append(row);}}
+function setPreset(key,ref){currentKey=key;$('active-dictionary').value=key;$('edit-dictionary').value=key;$('source').value=B.expand(registry,ref);editorRows();compute();}
+$('active-dictionary').addEventListener('change',e=>{currentKey=e.target.value;$('edit-dictionary').value=currentKey;editorRows();compute();});$('edit-dictionary').addEventListener('change',editorRows);
+$('preset-check').addEventListener('click',()=>setPreset('code','code:5'));
+$('preset-hello').addEventListener('click',()=>{currentKey='chat';$('active-dictionary').value='chat';$('edit-dictionary').value='chat';$('source').value='Hello world!\nשלום עולם 🌊';editorRows();compute();});
+function selectInspector(t){const box=$('inspector');box.replaceChildren();if(!t){box.append(el('div','inspector-placeholder','No tiles yet.'));return;}
+ if(t.kind==='literal'){box.append(el('div','ins-meta','UNMATCHED UTF-8 / LITERAL'),el('h4','',`Literal text · ${B.byteLen(t.text)} bytes`));box.append(el('pre','',t.text));box.append(el('p','hint','The text is included in the packet as literal UTF-8. No dictionary entry is required to recover it.'));return;}
+ const d=t.dictionary,e=t.entry,ref=d.key+':'+e.id;
+ box.append(el('div','ins-meta',`${d.name.toUpperCase()}  /  ENTRY ${e.id}  /  ${e.kind.toUpperCase()}`),el('h4','',`${e.glyph}  ${e.name}`));
+ const id=(d.id<<8)|e.id;box.append(el('p','hint',`Logical 16-bit tile ID: 0x${id.toString(16).toUpperCase().padStart(4,'0')} (${d.id} dictionary byte + ${e.id} entry byte). Actual network packet adds tags and framing.`));
+ if(e.kind==='recipe'){box.append(el('div','ins-meta','OPEN THE RECIPE / REFERENCES'));const tree=el('div','recipe-tree');for(const part of B.flat(registry,ref)){const row=el('div',part.depth?'indent':'',`${'· '.repeat(part.depth)}${part.ref}  ${B.get(registry,part.ref).e.name}${part.text?'  →  '+part.text.replace(/\n/g,' ↵ '):''}`);tree.append(row);}box.append(tree);}
+ box.append(el('div','ins-meta','FULL EXPANSION'));box.append(el('pre','',t.text));}
+function renderTiles(tokens){const host=$('tiles');host.replaceChildren();$('tile-count').textContent=tokens.length+' TILE'+(tokens.length===1?'':'S');
+ tokens.forEach((t,i)=>{const literal=t.kind==='literal';const btn=el('button','tile-card'+(literal?' literal':''));btn.type='button';btn.title=literal?'Literal UTF-8':`${t.entry.name} (tap to inspect)`;btn.setAttribute('aria-label',literal?'Open literal text':`Inspect ${t.entry.name}`);
+ const pic=el('span','tile-icon',literal?'Aa':t.entry.glyph),nm=el('strong','',literal?'LITERAL':t.entry.name),small=el('small','',literal?`${B.byteLen(t.text)} B`:`${t.dictionary.key}:${t.entry.id}`);
+ if(!literal){btn.style.borderTop=`4px solid ${t.dictionary.color}`;}btn.append(pic,nm,small);btn.addEventListener('click',()=>{for(const x of host.children)x.setAttribute('aria-pressed','false');btn.setAttribute('aria-pressed','true');selected=i;selectInspector(t);});btn.addEventListener('mouseenter',()=>selectInspector(t));btn.addEventListener('focus',()=>selectInspector(t));host.append(btn);});if(tokens.length){const index=Math.min(selected??0,tokens.length-1);host.children[index].click();}else selectInspector(null);}
+function compute(){try{const text=$('source').value;const shared=B.encode(text,registry,currentKey,'shared','auto'),embedded=B.encode(text,registry,currentKey,'embedded','auto');last=shared;renderTiles(shared.tokens);$('raw-count').textContent=shared.rawBytes+' B';$('shared-count').textContent=shared.bytes.length+' B';$('embedded-count').textContent=embedded.bytes.length+' B';updatePacket();updateStage();}catch(e){last=null;alertTo('editor-alert',e.message,'error');}}
+$('encode').addEventListener('click',compute);$('source').addEventListener('input',()=>{last=null;$('tile-count').textContent='NOT ENCODED';$('packet-text').value='';});
+$('save-as-entry').addEventListener('click',()=>{$('edit-dictionary').value=currentKey;$('entry-text').value=$('source').value;$('entry-name').value='MY_SNIPPET';$('entry-glyph').value='💠';$('entry-kind').value='text';syncKind();switchTab('registry');editorRows();});
+$('go-transport').addEventListener('click',()=>{compute();switchTab('transport');});
+function syncKind(){const rec=$('entry-kind').value==='recipe';$('text-wrap').classList.toggle('hidden',rec);$('refs-wrap').classList.toggle('hidden',!rec);}
+$('entry-kind').addEventListener('change',syncKind);
+$('add-entry').addEventListener('click',()=>{try{const key=$('edit-dictionary').value;const input={name:$('entry-name').value,glyph:$('entry-glyph').value,kind:$('entry-kind').value,text:$('entry-text').value,refs:$('entry-refs').value};registry=B.addEntry(registry,key,input);populate();$('edit-dictionary').value=key;editorRows();alertTo('editor-alert',`Saved new ${input.kind} entry. The registry fingerprint changed; other machines need this exact version.`,'success');compute();}catch(e){alertTo('editor-alert',e.message,'error');}});
+$('test-cycle').addEventListener('click',()=>{try{const clone=JSON.parse(JSON.stringify(registry));const d=clone.dictionaries[0],x=Math.max(...d.entries.map(e=>e.id))+1;d.entries.push({id:x,name:'CYCLE_A',glyph:'↻',kind:'recipe',refs:[`code:${x+1}`]},{id:x+1,name:'CYCLE_B',glyph:'↻',kind:'recipe',refs:[`code:${x}`]});B.validate(clone);alertTo('editor-alert','ERROR: cycle was not detected!','error');}catch(e){alertTo('editor-alert','Correct rejection: '+e.message,'success');}});
+function saveBytes(data,name,type){const url=URL.createObjectURL(new Blob([data],{type}));const a=el('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+$('export-registry').addEventListener('click',()=>saveBytes(B.canonical(registry),'binbol-registry-v1.json','application/json'));
+$('import-registry').addEventListener('change',async ev=>{const f=ev.target.files[0];if(!f)return;try{if(f.size>65536)throw Error('Registry import exceeds 64 KB.');const data=JSON.parse(await f.text());B.validate(data);registry=data;currentKey=registry.dictionaries[0].key;populate();editorRows();compute();alertTo('editor-alert','Registry imported and validated. Existing packets may require this new registry.','success');}catch(e){alertTo('editor-alert',e.message,'error');}finally{ev.target.value='';}});
+$('reset-registry').addEventListener('click',()=>{if(!confirm('Reset the dictionary registry and discard custom entries?'))return;registry=B.initial();currentKey='code';populate();setPreset('code','code:5');alertTo('editor-alert','Restored built-in registry.','success');});
+function updatePacket(){if(!last)return;const mode=$('transport-mode').value,strategy=$('strategy').value;try{const res=B.encode($('source').value,registry,currentKey,mode,strategy);last=res;$('packet-text').value=B.base64(res.bytes);$('packet-size').textContent=res.bytes.length+' B';$('payload-size').textContent=res.payloadBytes+' B';$('registry-size').textContent=res.dictionaryBytes+' B';}catch(e){alertTo('transfer-status',e.message,'error');}}
+$('packet-build').addEventListener('click',()=>{if(!last)compute();else updatePacket();});for(const id of ['transport-mode','strategy'])$(id).addEventListener('change',updatePacket);
+$('packet-copy').addEventListener('click',async()=>{if(!last)compute();const value=$('packet-text').value;try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(value);alertTo('transfer-status','Packet copied. Paste it on Computer B.','success');}else{const x=$('packet-text');x.focus();x.select();document.execCommand('copy');alertTo('transfer-status','Selected packet text for copying.','success');}}catch(e){const x=$('packet-text');x.focus();x.select();alertTo('transfer-status','Clipboard blocked here. The packet is selected; copy it manually.');}});
+$('packet-save').addEventListener('click',()=>{if(!last)compute();if(last)saveBytes(last.bytes,'binbol-message.bndr','application/octet-stream');});
+$('paste-sender').addEventListener('click',()=>{$('received-text').value=$('packet-text').value;decodeReceived();});
+function decodeReceived(other){try{const bytes=B.fromBase64($('received-text').value);const result=B.parse(bytes,other||registry);$('received-output').value=result.text;$('receive-badge').textContent='VERIFIED MATCH';alertTo('transfer-status',`Decoded ${result.tokens.length} token(s) from a ${result.packetBytes} B binary packet. ${result.transport==='shared'?'Used the receiver registry.':'Used registry embedded in packet.'} Registry fingerprint match is not authentication.`,'success');return result;}catch(e){$('received-output').value='';$('receive-badge').textContent='DECODE FAILED';alertTo('transfer-status',e.message,'error');return null;}}
+$('decode-packet').addEventListener('click',()=>decodeReceived());
+$('open-packet').addEventListener('change',async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>150000)throw Error('Packet exceeds 150 KB limit.');const bytes=new Uint8Array(await file.arrayBuffer());$('received-text').value=B.base64(bytes);decodeReceived();}catch(e){alertTo('transfer-status',e.message,'error');}finally{ev.target.value='';}});
+$('wrong-registry').addEventListener('click',()=>{try{const bytes=B.fromBase64($('received-text').value||$('packet-text').value);const r=JSON.parse(JSON.stringify(registry));r.dictionaries[0].entries[0].text+=' WRONG';const result=B.parse(bytes,r);if(result.transport==='embedded')alertTo('transfer-status','Embedded packet correctly ignored the local registry and used the definitions inside the file. Try Shared mode for mismatch rejection.');else alertTo('transfer-status','Unexpected mismatch acceptance!','error');}catch(e){alertTo('transfer-status','Correct mismatch rejection: '+e.message,'success');$('receive-badge').textContent='REJECTED';}});
+function renderStage(i){stage=Math.max(0,Math.min(steps.length-1,i));for(const x of document.querySelectorAll('[data-step]'))x.classList.toggle('on',Number(x.dataset.step)===stage);$('flow-label').textContent='STEP '+(stage+1)+' / '+steps.length;$('flow-title').textContent=steps[stage][0];$('flow-description').textContent=steps[stage][1];try{$('flow-data').textContent=steps[stage][2]();}catch(e){$('flow-data').textContent='Packet not ready';}}
+function updateStage(){renderStage(stage);}
+for(const x of document.querySelectorAll('[data-step]'))x.addEventListener('click',()=>{stopPlay();renderStage(Number(x.dataset.step));});
+$('step-back').addEventListener('click',()=>{stopPlay();renderStage(stage-1);});$('step-next').addEventListener('click',()=>{stopPlay();renderStage(stage+1);});
+function stopPlay(){if(timer){clearInterval(timer);timer=null;$('step-play').textContent='▶ Play';}}
+$('step-play').addEventListener('click',()=>{if(timer){stopPlay();return;}renderStage(0);$('step-play').textContent='■ Stop';timer=setInterval(()=>{if(stage>=4){stopPlay();return;}renderStage(stage+1);},1300);});
+populate();setPreset('code','code:5');$('received-text').value=$('packet-text').value;decodeReceived();
+})();
+
+</script>
+</body>
+</html>
