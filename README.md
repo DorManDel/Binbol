@@ -1,6 +1,6 @@
 # Binbol — From Binary to Symbol
 
-> **Research prototype v0.4** · *Encode the meaning. Visualize the bits.*
+> **Research prototype v0.5** · *Encode the meaning. Visualize the bits.*
 
 **Binbol** explores the connection between **semantic meaning**, **binary identifiers**, and **visual symbols**. The goal is to prototype reversible encodings, symbol-based code, shared dictionaries, and compact instruction formats — then measure when they help and when they do not.
 
@@ -52,3 +52,20 @@ The current virtual machine is an educational, restricted interpreter; the proje
 3. Add reproducible benchmarks for shared vs embedded dictionaries, Huffman/BPE/varints, and performance.
 4. Explore adaptive instruction profiles (8/16/32/64-bit) and compare compact vs aligned access.
 5. Keep security and cryptographic mechanisms separate from encoding and rendering.
+
+## Dictionary Registry Lab v0.5
+
+**Try [Dictionary Registry Lab](dictionary-lab.html)** or open its [self-contained mobile version](Binbol-Dictionary-Mobile.html).
+
+The new **BND1** format extends Binbol with a dictionary of dictionaries. The `code` dictionary contains `CHECK_PLAYER`, a composite recipe referencing four individual definitions. Users can create text or recipe entries, inspect tile IDs and expansions, export/import registries, and send a `BND1:` Base64 packet or `.bndr` binary file.
+
+| Stage | Research question | Experiment |
+| --- | --- | --- |
+| Compose | What should one tile mean? | Create text and preserve unmatched Unicode literals |
+| Dictionary Registry | Can entries reference other entries? | Nested recipes, cross-dictionary references and cycle rejection |
+| Two Computers | Can the receiver reconstruct the source? | Shared vs embedded dictionaries, registry mismatch test |
+| Pipeline / Security | Where does the codec fit? | Source → dictionary → binary → RAM/decoder → glyph; authenticated encryption is separate |
+
+A 16-bit logical tile ID does not imply the complete packet costs two bytes. Shared mode assumes an already installed matching registry, while embedded mode sends its definition. The 32-bit FNV fingerprint is **noncryptographic**; Binbol does **not** provide encryption, real networking or arbitrary program execution.
+
+Run `node dictionary-registry-test.cjs`. Read the [Hebrew guide](docs/DICTIONARY_REGISTRY_HE.md) and [English format notes](docs/DICTIONARY_REGISTRY_EN.md).
