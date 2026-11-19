@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100d1e"><meta name="description" content="Binbol Dictionary Registry: compose, encode, inspect, share and decode semantic tiles.">
+<title>Dictionary Lab — Binbol</title>
+<link rel="stylesheet" href="dictionary-lab.css">
+</head>
+<body>
+<div class="atmosphere" aria-hidden="true"></div>
+<header class="masthead shell">
+<a class="brand" href="index.html" title="Offline demo"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="3"/><path d="M24 12 36 24 24 36 12 24 24 12Z" fill="currentColor" opacity=".65"/></svg></span><span>BIN<span class="gold">BOL</span><small>DICTIONARY LAB</small></span></a>
+<a href="index.html" class="back-link">← Main studio</a>
+</header>
+<main class="shell">
+<section class="hero"><div class="overline"><span class="pulse"></span> INTERACTIVE RESEARCH LAB <span class="dotsep">/</span> v0.5</div>
+<h1>One identity.<br><em>Many meanings.</em></h1>
+<p>Define a dictionary, turn text or a tiny program into semantic tiles, send a binary packet to another computer, and expand it like a recipe. Inspect every byte and assumption along the way.</p>
+<div class="pill-row"><span>● Lossless text</span><span>● Multi-dictionary registry</span><span>● Cycles rejected</span><span>● No code execution</span></div>
+</section>
+<nav class="tabs" aria-label="Lab pages">
+<button type="button" data-tab="compose" class="tab active" aria-selected="true">01 / Compose</button>
+<button type="button" data-tab="registry" class="tab" aria-selected="false">02 / Dictionaries</button>
+<button type="button" data-tab="transport" class="tab" aria-selected="false">03 / Two computers</button>
+<button type="button" data-tab="pipeline" class="tab" aria-selected="false">04 / How it works</button>
+</nav>
+<section class="page active" data-page="compose" aria-label="Compose and encode">
+ <div class="section-intro"><div><span class="overline">TEXT → IDENTIFIERS → TILES</span><h2>Write it. Tile it. Open it.</h2></div><p>Start with <strong>CHECK_PLAYER</strong>, a named recipe made of four smaller definitions. Or write any text. Unknown characters are preserved as literal UTF-8.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">SOURCE / A</span><h3>Program or message</h3></div><span class="tag">EDITABLE</span></div>
+   <label class="field">Active dictionary<select id="active-dictionary"></select></label>
+   <label class="field">Source text<textarea id="source" rows="10" spellcheck="false" dir="auto"></textarea></label>
+   <div class="buttons wrap-buttons"><button class="button secondary" id="preset-check">🛡 CHECK_PLAYER</button><button class="button secondary" id="preset-hello">💬 Hello world</button><button class="button primary" id="encode">Encode → Tiles</button></div>
+   <p class="hint">A tile can represent a known entry. When no entry matches, Binbol includes the original bytes as a literal, so nothing disappears.</p>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">OUTPUT / B</span><h3>Semantic tile strip</h3></div><span class="tag" id="tile-count">0 TILES</span></div>
+   <div id="tiles" class="tile-strip" aria-label="Encoded tiles"></div>
+   <div class="inspector" id="inspector"><div class="inspector-placeholder">Tap a tile to inspect its dictionary, ID and full expansion.</div></div>
+   <div class="mini-stats"><div><small>Original UTF-8</small><strong id="raw-count">—</strong></div><div><small>Shared-dict packet</small><strong id="shared-count">—</strong></div><div><small>Embedded-dict packet</small><strong id="embedded-count">—</strong></div></div>
+   <div class="buttons"><button class="button secondary" id="save-as-entry">＋ Save source as a tile</button><button class="button primary" id="go-transport">Send to computer B →</button></div>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="registry" aria-label="Dictionary registry and editor">
+ <div class="section-intro"><div><span class="overline">MASTER REGISTRY → DICTIONARIES → ENTRIES</span><h2>Recipes made of recipes.</h2></div><p>Choose a dictionary, create a text definition or compose an existing set of entries. Each entry has a stable numeric ID and a glyph for display.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">REGISTRY EDITOR</span><h3>Create an entry</h3></div><span class="tag">NO EVAL</span></div>
+   <label class="field">Dictionary<select id="edit-dictionary"></select></label>
+   <div class="form-grid"><label class="field">Name<input id="entry-name" maxlength="64" value="MY_MESSAGE" spellcheck="false"></label><label class="field">Symbol / tile<input id="entry-glyph" maxlength="16" value="💠" spellcheck="false"></label></div>
+   <label class="field">Entry type<select id="entry-kind"><option value="text">Text / code expansion</option><option value="recipe">Recipe — reference other entries</option></select></label>
+   <label class="field" id="text-wrap">Text to expand<textarea id="entry-text" rows="5" spellcheck="false">Hello Binbol!</textarea></label>
+   <label class="field hidden" id="refs-wrap">References (comma-separated)<textarea id="entry-refs" rows="4" spellcheck="false">code:1, code:2, code:3, code:4</textarea><small>For example: code:1, code:2, testing:1</small></label>
+   <div class="buttons"><button id="add-entry" class="button primary">＋ Add to registry</button><button id="test-cycle" class="button secondary">Test circular reference</button></div>
+   <div id="editor-alert" class="notification" role="status" aria-live="polite">Built-in entries and custom definitions use the same decoder. References must exist and form an acyclic graph.</div>
+   <div class="buttons"><button id="export-registry" class="button secondary">↓ Export registry JSON</button><label class="button secondary file-button">↑ Import JSON<input id="import-registry" type="file" accept=".json,application/json"></label><button id="reset-registry" class="button subtle">Reset</button></div>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">DICTIONARY CONTENT</span><h3 id="registry-heading">Code recipes</h3></div><span id="registry-hash" class="tag">—</span></div>
+   <div id="dictionary-entries" class="entry-list"></div>
+   <p class="hint">Click an entry to expand it. A registry fingerprint catches accidental mismatches, but is not a cryptographic signature.</p>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="transport" aria-label="Two-computer transfer">
+ <div class="section-intro"><div><span class="overline">COMPUTER A → PACKET → COMPUTER B</span><h2>Share meaning with a known dictionary.</h2></div><p>Transfer the Base64 packet text or a binary file between devices. The receiver must have the identical registry, unless the dictionary is embedded in the packet.</p></div>
+ <div class="cols">
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">COMPUTER A / SENDER</span><h3>Create a binary packet</h3></div><span class="tag">BND1</span></div>
+   <label class="field">Transfer mode<select id="transport-mode"><option value="shared">Shared dictionary — receiver has registry</option><option value="embedded">Embedded dictionary — send definitions too</option></select></label>
+   <label class="field">ID packing strategy<select id="strategy"><option value="auto">Auto: choose smaller payload</option><option value="flat">Flat: every ID contains its dictionary ID</option><option value="context">Context: switch dictionary when needed</option></select></label>
+   <div class="buttons"><button id="packet-build" class="button primary">Encode packet</button><button id="packet-copy" class="button secondary">Copy packet</button><button id="packet-save" class="button secondary">↓ .bndr file</button></div>
+   <label class="field">Packet text (Base64 transport envelope)<textarea rows="6" spellcheck="false" readonly id="packet-text" dir="ltr"></textarea></label>
+   <div class="mini-stats"><div><small>Binary on wire</small><strong id="packet-size">—</strong></div><div><small>Payload only</small><strong id="payload-size">—</strong></div><div><small>Full dictionary</small><strong id="registry-size">—</strong></div></div>
+   <p class="hint">Base64 is for easy copying. Its text is usually larger than the underlying binary packet. Packet bytes include protocol framing and, when selected, dictionary data.</p>
+  </article>
+  <article class="panel"><div class="panel-header"><div><span class="eyebrow">COMPUTER B / RECEIVER</span><h3>Paste and decode</h3></div><span class="tag" id="receive-badge">READY</span></div>
+   <label class="field">Received packet<textarea id="received-text" rows="6" spellcheck="false" placeholder="Paste a BND1:… packet from another computer" dir="ltr"></textarea></label>
+   <div class="buttons"><button id="paste-sender" class="button secondary">↓ Use A's packet</button><button id="decode-packet" class="button primary">Decode on B</button><label class="button secondary file-button">↑ Open .bndr<input id="open-packet" type="file" accept=".bndr,application/octet-stream"></label><button id="wrong-registry" class="button secondary">Test mismatched registry</button></div>
+   <label class="field">Reconstructed message<textarea id="received-output" rows="7" readonly dir="auto" spellcheck="false"></textarea></label>
+   <div id="transfer-status" class="notification" role="status" aria-live="polite">This is local simulation: no live network connection and no encryption.</div>
+   <p class="hint">Try Shared mode, then modify the registry and decode again. Embedded mode is self-contained but can be much larger.</p>
+  </article>
+ </div>
+</section>
+<section class="page" data-page="pipeline" aria-label="Conceptual and security pipelines">
+ <div class="section-intro"><div><span class="overline">OPEN EACH LAYER</span><h2>Follow the bits.</h2></div><p>Click through the stages to see where dictionaries, RAM, decoding, execution and visual tiles fit. A renderer is not a substitute for an instruction interpreter.</p></div>
+ <article class="panel pipeline-panel"><div class="flow-track" id="flow-track">
+  <button type="button" data-step="0" class="flow-step on"><span>01</span><b>Source</b></button><button type="button" data-step="1" class="flow-step"><span>02</span><b>Dictionary</b></button><button type="button" data-step="2" class="flow-step"><span>03</span><b>Binary file</b></button><button type="button" data-step="3" class="flow-step"><span>04</span><b>RAM / Decode</b></button><button type="button" data-step="4" class="flow-step"><span>05</span><b>Meaning / Tile</b></button>
+ </div><div class="flow-details"><span class="overline" id="flow-label">STEP 1 / 5</span><h3 id="flow-title">Source: the original message</h3><p id="flow-description">We begin with ordinary text or a tiny program. Nothing is compressed yet.</p><pre id="flow-data">LOAD player.health</pre></div>
+ <div class="buttons flow-actions"><button id="step-back" class="button secondary">← Previous</button><button id="step-next" class="button primary">Next →</button><button id="step-play" class="button secondary">▶ Play</button></div>
+ </article>
+ <div class="section-intro spacer-top"><div><span class="overline">SECURITY BOUNDARY</span><h2>Encoding is not encryption.</h2></div><p>Dictionary secrecy might disguise text, but the protocol needs standard authenticated encryption to protect real conversations.</p></div>
+ <div class="security-track"><div>Source text</div><span>→</span><div>Registry / codec</div><span>→</span><div class="secure">Authenticated encryption<br><small>separate, not implemented</small></div><span>→</span><div>Network</div><span>→</span><div>Verify · decode</div></div>
+ <div class="caution"><strong>Research caveat:</strong> the prototype uses a 32-bit, non-cryptographic registry checksum for mismatch detection, not authentication. Never rely on this packet format for confidentiality. Compressing secrets together with attacker-controlled text can leak information via message lengths.</div>
+ <div class="section-intro spacer-top"><div><span class="overline">WHAT TO TEST NEXT</span><h2>Do we actually win?</h2></div></div>
+ <div class="metrics-roadmap"><div><b>Storage</b><p>Compare complete packet size, including shared-dictionary distribution when relevant.</p></div><div><b>Speed</b><p>Measure real encode/decode latency across many iterations and devices.</p></div><div><b>Reliability</b><p>Test Unicode, invalid packets, version mismatch, loops and nested recipes.</p></div><div><b>Readability</b><p>Check whether people understand tiles faster than source code.</p></div></div>
+ </section>
+</main>
+<footer class="shell footer"><span>BINBOL / DICTIONARY REGISTRY V1</span><span>Experimental · No network · No encryption · No arbitrary code execution</span><a href="index.html">← Main studio</a></footer>
+<script src="dictionary-registry-core.js"></script>
+<script src="dictionary-lab.js"></script>
+</body>
+</html>
